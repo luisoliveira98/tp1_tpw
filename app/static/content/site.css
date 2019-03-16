@@ -42,3 +42,35 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.btn-outline-success1 {
+    color: #18bc9c;
+    background-color: transparent;
+    background-image: none;
+    border-color: #18bc9c
+}
+
+.btn-outline-success1:hover {
+    color: #fff;
+    background-color: #18bc9c;
+    border-color: #18bc9c
+}
+
+.btn-outline-success1.focus, .btn-outline-success1:focus {
+    box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5)
+}
+
+.btn-outline-success1.disabled, .btn-outline-success1:disabled {
+    color: #18bc9c;
+    background-color: transparent
+}
+
+.btn-outline-success1:not(:disabled):not(.disabled).active, .btn-outline-success1:not(:disabled):not(.disabled):active, .show > .btn-outline-success1.dropdown-toggle {
+    color: #fff;
+    background-color: #18bc9c;
+    border-color: #18bc9c
+}
+
+.btn-outline-success1:not(:disabled):not(.disabled).active:focus, .btn-outline-success1:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-success1.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5)
+}

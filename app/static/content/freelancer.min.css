@@ -145,8 +145,8 @@ section h2 {
 
 @media (min-width: 992px) {
     #mainNav {
-        padding-top: 0.6rem;
-        padding-bottom: 0.6rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
         -webkit-transition: padding-top .3s, padding-bottom .3s;
         transition: padding-top .3s, padding-bottom .3s
     }
@@ -172,8 +172,8 @@ section h2 {
     }
 
     #mainNav.navbar-shrink {
-        padding-top: .25rem;
-        padding-bottom: .25rem
+        padding-top: .2rem;
+        padding-bottom: .2rem
     }
 
     #mainNav.navbar-shrink .navbar-brand {

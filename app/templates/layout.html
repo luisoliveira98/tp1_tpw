@@ -34,32 +34,37 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Receitas</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Pitadinha</a>
       <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'home' %}">Portfolio</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'about' %}">About</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'contact' %}">Contact</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Receitas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
           </li>
         </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
       </div>
     </div>
     </nav>
 
-    <!-- Header -->
-    <header class="masthead text-white text-center" style="background-image: url({% static 'imgs/frontPage.jpg' %}); background-size:100%;">
+    <header class="masthead text-white text-center" style="background-image: url({% static 'imgs/frontPage.jpg' %}); background-size:100%; background-position: center;  background-size: cover;">
         <div class="container">
-          <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">
-          <h1 class="text-uppercase mb-0">Receitas</h1>
+          <!--<img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">-->
+          <h1 class="text-uppercase mb-0">Pitadinha</h1>
           <hr class="star-light">
           <h2 class="font-weight-light mb-0">Web Developer - Graphic Artist - User Experience Designer</h2>
         </div>
@@ -70,6 +75,8 @@
     <main role="main">
         <div class="container body-content">
             <p></p>
+            <!-- Header -->
+
             {% block content %} {% endblock %}
         </div> <!-- /container -->
     </main>
@@ -81,15 +88,10 @@
 
     <!-- JQuery and Bootstrap core
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{% static 'scripts/jquery-3.3.1.slim.min.js' %}"></script>
-    <script src="{% static 'scripts/popper.min.js' %}"></script>
-    <script src="{% static 'scripts/bootstrap.min.js' %}"></script>
-
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'scripts/jquery.min.js' %}"></script>
-    <script src="{% static 'scripts/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <!-- Plugin JavaScript -->
     <script src="{% static 'scripts/jquery.easing.min.js' %}"></script>
@@ -97,6 +99,11 @@
 
     <!-- Custom scripts for this template -->
     <script src="{% static 'scripts/freelancer.min.js' %}"></script>
+
+  <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'scripts/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'scripts/popper.min.js' %}"></script>
+    <script src="{% static 'scripts/bootstrap.min.js' %}"></script>
 
   </body>
 </html>
