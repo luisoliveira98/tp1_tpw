@@ -46,34 +46,33 @@
               Receitas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Sopas</a>
+              <a class="dropdown-item" href="#">Carnes</a>
+              <a class="dropdown-item" href="#">Peixes</a>
+              <a class="dropdown-item" href="#">Sobremesas</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <div class="input-group  my-2 my-lg-0">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fas fa-search" style="color: #18bc9c"></i></div>
+            </div>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          </div>
         </form>
+
+        {% include 'loginpartial.html' %}
       </div>
     </div>
     </nav>
 
-    <header class="masthead text-white text-center" style="background-image: url({% static 'imgs/frontPage.jpg' %}); background-size:100%; background-position: center;  background-size: cover;">
-        <div class="container">
-          <!--<img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">-->
-          <h1 class="text-uppercase mb-0">Pitadinha</h1>
-          <hr class="star-light">
-          <h2 class="font-weight-light mb-0">Web Developer - Graphic Artist - User Experience Designer</h2>
-        </div>
-    </header>
-
-
 
     <main role="main">
-        <div class="container body-content">
+    <!--<div class="container body-content">-->
+        <div>
             <p></p>
             <!-- Header -->
 

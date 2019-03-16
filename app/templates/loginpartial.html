@@ -1,0 +1,16 @@
+
+{% if user.is_authenticated %}
+
+<form id="logoutForm" action="/logout" method="get" class="form-inline my-2 my-lg-0">
+    {% csrf_token %}
+    <span class="navbar-brand">Hello {{ user.username }}!</span>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Off</button>
+</form>
+
+{% else %}
+
+<ul class="navbar-nav navbar-right">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="location.href='/login'">Login</button>
+</ul>
+
+{% endif %}
