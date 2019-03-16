@@ -7,26 +7,28 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <section id="loginForm" style="margin:0 auto; width: 50%">
+                <section id="loginForm" >
                     <form action="." method="post" class="form-horizontal">
                         {% csrf_token %}
                         <h4><p style="text-align:center">Use a local account to log in.</p></h4>
                         <hr />
-                        <div class="form-group" >
+                        <div style="margin:0 auto; width: 50%">
+                            <div class="form-group" >
                             {{ form.username.label_tag }}
                             {{ form.username | add_class:"form-control"}}
                         </div>
-                        <div class="form-group">
-                            {{ form.password.label_tag }}
-                            {{ form.password | add_class:"form-control"}}
+                            <div class="form-group">
+                                {{ form.password.label_tag }}
+                                {{ form.password | add_class:"form-control"}}
+                            </div>
+                            <div class="form-group" style="margin:0 auto; width: 35%">
+                                <input type="hidden" name="next" value="/" />
+                                <input type="submit" value="Log in" class="btn btn-outline-success my-2 my-sm-0" />
+                            </div>
+                            {% if form.errors %}
+                            <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
-                            <input type="hidden" name="next" value="/" />
-                            <input type="submit" value="Log in" class="btn btn-outline-success my-2 my-sm-0" />
-                        </div>
-                        {% if form.errors %}
-                        <p class="validation-summary-errors">Please enter a correct user name and password.</p>
-                        {% endif %}
                     </form>
                 </section>
             </div>
