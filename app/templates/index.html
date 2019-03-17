@@ -2,13 +2,44 @@
 
 {% block content %}
 
-    <header class="masthead text-white text-center" style="background-image: url('static/imgs/frontPage.jpg'); background-size:100%; background-position: center;  background-size: cover;">
+    <header class="masthead text-white text-center"
+            style="background-image: url('../static/imgs/frontPage.jpg'); background-size:100%; background-position: center;  background-size: cover;">
         <div class="container">
-          <!--<img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">-->
-          <h1 class="text-uppercase mb-0">Pitadinha</h1>
-          <hr class="star-light">
-          <h2 class="font-weight-light mb-0">Web Developer - Graphic Artist - User Experience Designer</h2>
+            <!--<img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">-->
+            <h1 class="text-uppercase mb-0">Pitadinha</h1>
+            <hr class="star-light">
+            <h2 class="font-weight-light mb-0">Pratos Originais - Sabores Inesquecíveis - Sobremesas Memoráveis</h2>
         </div>
     </header>
+
+    <!-- Portfolio Grid Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="text-center text-uppercase text-secondary mb-0">Receitas mais Populares</h2>
+            <hr class="star-dark mb-5">
+
+            <div class="row">
+
+
+                <!-- Loop -->
+                <div class="col-md-6 col-lg-4">
+                    <!-- Insert URL -->
+                    <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-1">
+                        <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                            <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                                <!-- Receita.Nome -->
+                                <h5>Receita 1</h5>
+                            </div>
+                        </div>
+                        <!-- Receita.ImageURL -->
+                        <img class="img-fluid" src="../static/portfolio/food1.jpg" alt="">
+                    </a>
+                </div>
+                <!-- End Loop-->
+
+
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
