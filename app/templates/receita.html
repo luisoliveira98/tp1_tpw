@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container body-content">
+        <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Nome da Receita</h3>
+        <hr class="star-dark mb-5" style="margin-top: 1.5rem">
+
+        <div class="row" >
+            <div class="col-sm-6 align-self-center">
+                <h5 class="text-center text-uppercase text-secondary mb-0">Descrição</h5>
+                <br>
+
+                <!-- Receita.Descrição -->
+                <p align="justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula
+                    eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi
+                    tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque
+                    purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.
+                </p>
+            </div>
+            <div class="col-sm-6">
+
+                <!-- Receita.Imagem-->
+                <img class="img-fluid" src="../static/portfolio/food1.jpg" style="border-radius: 10px"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 align-self-center">
+
+            </div>
+            <div class="col-sm-6 align-self-center" style="margin-top: 20px">
+                <div style="border:3px solid #18bc9c; border-radius: 10px; padding: 10px 10px 10px 10px;">
+                    <div style="padding: 5px">
+                        <i class="far fa-clock" style="color: #18bc9c; padding-right: 5px;"></i>  Duração: 1h00
+                    </div>
+
+                    <div style="padding: 5px"; >
+                        <td style="vertical-align:middle;">
+                            <i class="far fa-clock" style="color: #18bc9c; padding-right: 5px;"></i> Dificuldade:
+                            <i class="fas fa-star" style="font-size:10px;"></i>
+                            <i class="fas fa-star" style="font-size:10px;"></i>
+                            <i class="fas fa-star" style="font-size:10px;"></i>
+                            <i class="far fa-star" style="font-size:10px;"></i>
+                            <i class="far fa-star" style="font-size:10px;"></i>
+                        </td>
+                    </div>
+
+                    <div style="padding: 5px">
+                        <!-- Receita.Dose -->
+                        <i class="fas fa-balance-scale" style="color: #18bc9c; padding-right: 5px;"></i> Dose: 1 Dose
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

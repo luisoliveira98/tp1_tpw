@@ -32,3 +32,9 @@ def about(request):
         'year': datetime.now().year,
     }
     return render(request, 'about.html', tparams)
+
+
+def receita(request):
+    assert isinstance(request, HttpRequest)
+
+    return render(request, 'receita.html')
