@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from datetime import datetime
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
+from django.views.generic import CreateView
 
 
 def home(request):
@@ -39,22 +42,4 @@ def receita(request):
     assert isinstance(request, HttpRequest)
 
     return render(request, 'receita.html')
-
-
-def signup(request):
-    assert isinstance(request, HttpRequest)
-
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            password = form.cleaned_data['password']
-
-            user = User.objects.create_user(username=name, password=password)
-
-            return render(request, 'layout.html')
-    else:
-        form = SignUpForm()
-
-    return render(request, 'signup.html', {'form': form})
 

@@ -27,9 +27,6 @@
                                     <input type="hidden" name="next" value="/"/>
                                     <input type="submit" value="Sign &nbsp; in" class="btn btn-outline-success1 my-2 my-sm-0"/>
                                 </div>
-                                {% if form.errors %}
-                                    <p class="validation-summary-errors">Por favor, introduza uma nome de utilizador e uma password corretas</p>
-                                {% endif %}
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group" style="margin:0 auto; width: 25%">
@@ -37,6 +34,9 @@
                                     <input type="submit" value="Sign up" class="btn btn-outline-success1 my-2 my-sm-0" onclick="location.href='{% url 'signup' %}'"/>
                                 </div>
                             </div>
+                            {% if form.errors %}
+                                <p class="validation-summary-errors">Por favor, introduza uma nome de utilizador e uma password corretas</p>
+                            {% endif %}
                         </div>
 
                     </div>
