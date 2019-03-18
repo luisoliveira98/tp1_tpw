@@ -1,11 +1,22 @@
 
 {% if user.is_authenticated %}
 
-<form id="logoutForm" action="/logout" method="get" class="form-inline my-2 my-lg-0">
-    {% csrf_token %}
-    <span class="navbar-brand">Hello {{ user.username }}!</span>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Off</button>
-</form>
+<span class="navbar-brand" style="margin-right: -20px">
+    <a type="button" class="far fa-user" data-container="body" data-toggle="popover" data-placement="left" data-content='
+        <div class="media">
+            <div class="media-body">
+                <h5 class="media-heading">Olá, {{ user.get_username }}!</h5>
+                <p>Bem vindo, ao Pitadinhas! </p>
+            </div>
+            <form id="logoutForm" action="/logout" method="get" class="form-inline my-2 my-lg-0">
+                {% csrf_token %}
+                <button class="fas fa-sign-out-alt" type="submit" style="font-size: 20px; color: #18bc9c; background-color:transparent; border-color:transparent;"
+                </button>
+            </form>
+        </div>'>
+    </a>
+</span>
+
 
 {% else %}
 
