@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -43,5 +44,17 @@ def receita(request):
 def signup(request):
     assert isinstance(request, HttpRequest)
 
-    return render(request, 'signup.html')
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            password = form.cleaned_data['password']
+
+            user = User.objects.create_user(username=name, password=password)
+
+            return render(request, 'layout.html')
+    else:
+        form = SignUpForm()
+
+    return render(request, 'signup.html', {'form': form})
 

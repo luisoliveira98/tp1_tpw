@@ -9,7 +9,7 @@
             <section class="login" id="loginForm">
                 <form action="." method="post" class="form-horizontal">
                     {% csrf_token %}
-                    <h4><p style="text-align:center">Use a local account to sign in.</p></h4>
+                    <h4><p style="text-align:center">Insira os dados da sua conta!</p></h4>
                     <hr/>
                     <div>
                         <div class="form-group">
@@ -28,19 +28,14 @@
                                     <input type="submit" value="Sign &nbsp; in" class="btn btn-outline-success1 my-2 my-sm-0"/>
                                 </div>
                                 {% if form.errors %}
-                                    <p class="validation-summary-errors">Please enter a correct user name and
-                                        password.</p>
+                                    <p class="validation-summary-errors">Por favor, introduza uma nome de utilizador e uma password corretas</p>
                                 {% endif %}
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group" style="margin:0 auto; width: 25%">
                                     <input type="hidden" name="next" value="/"/>
-                                    <input type="submit" value="Sign up" class="btn btn-outline-success1 my-2 my-sm-0"/>
+                                    <input type="submit" value="Sign up" class="btn btn-outline-success1 my-2 my-sm-0" onclick="location.href='{% url 'signup' %}'"/>
                                 </div>
-                                {% if form.errors %}
-                                    <p class="validation-summary-errors">Please enter a correct user name and
-                                        password.</p>
-                                {% endif %}
                             </div>
                         </div>
 
