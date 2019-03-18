@@ -38,3 +38,10 @@ def receita(request):
     assert isinstance(request, HttpRequest)
 
     return render(request, 'receita.html')
+
+
+def signup(request):
+    assert isinstance(request, HttpRequest)
+
+    return render(request, 'signup.html')
+
