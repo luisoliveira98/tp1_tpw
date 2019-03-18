@@ -8,7 +8,7 @@ class Receita(models.Model):
     tempo = models.IntegerField()
     dificuldade = models.CharField(max_length=10)
     dose = models.IntegerField()
-    imagem = models.URLField()
+    imagem = models.CharField(max_length=50)
     data = models.DateField()
     utilizador = models.CharField(max_length=100)
 
