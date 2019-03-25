@@ -1,12 +1,53 @@
 {% extends 'layout.html' %}
 
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            console.log("test");
+        });
+
+        $('#x').click(function () {
+            console.log("ola");
+            if ($(this).hasClass("far")) {
+                $(this).addClass("fas").removeClass("far");
+            } else {
+                $(this).addClass("far").removeClass("fas");
+            }
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
 
     <div class="container body-content">
-        <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Nome da Receita</h3>
-        <hr class="star-dark mb-5" style="margin-top: 1.5rem">
 
-        <div class="row" >
+        {% if request.user.is_authenticated %}
+            <form id="logoutForm" action="." method="POST" >
+                {% csrf_token %}
+                <button
+                        name='save'
+                        id="x"
+                        class="fas fa-bookmark"
+                        type="submit"
+                        style=" font-size: 30px;
+                                color: #2C3E50;
+                                background-color:transparent;
+                                border-color:transparent;
+                                float: right;
+                                margin-top: 65px;">
+                </button>
+            </form>
+
+        {% endif %}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Nome da Receita</h3>
+                <hr class="star-dark mb-5" style="margin-top: 1.5rem">
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-sm-6 align-self-center">
                 <h5 class="text-center text-uppercase text-secondary mb-0">Descrição</h5>
                 <br>
@@ -31,21 +72,25 @@
                 <div style="border:3px solid #18bc9c; border-radius: 10px; padding: 10px 10px 10px 10px;">
                     <h5 class="text-center text-uppercase text-secondary mb-0">Ingredientes</h5>
 
-                    <p align="center"><br><i class="fas fa-angle-right" style="font-size: 15px; color: #18bc9c;"></i><b>&nbsp;&nbsp;Alimento: </b> quant&nbsp;&nbsp;<i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i></p>
-                    <p align="center" style="margin-top: -25px"><br><i class="fas fa-angle-right" style="font-size: 15px; color: #18bc9c;"></i><b>&nbsp;&nbsp;Alimento: </b> quant&nbsp;&nbsp;<i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i></p>
-               </div>
+                    <p align="center"><br><i class="fas fa-angle-right" style="font-size: 15px; color: #18bc9c;"></i><b>&nbsp;&nbsp;Alimento: </b>
+                        quant&nbsp;&nbsp;<i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i></p>
+                    <p align="center" style="margin-top: -25px"><br><i class="fas fa-angle-right"
+                                                                       style="font-size: 15px; color: #18bc9c;"></i><b>&nbsp;&nbsp;Alimento: </b>
+                        quant&nbsp;&nbsp;<i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i></p>
+                </div>
 
 
-             </div>
-            <div class="col-sm-6" style="margin-top: 20px">
+            </div>
+            <div class="col-sm-6 align-self-center" style="margin-top: 20px">
                 <div style="border:3px solid #18bc9c; border-radius: 10px; padding: 10px 10px 10px 10px;">
                     <!-- Duração -->
                     <div style="padding: 5px">
-                        &nbsp;<i class="fas fa-hourglass-half" style="color: #18bc9c; padding-right: 5px; font-size: 15px"></i>&nbsp; Duração: 1h00
+                        &nbsp;<i class="fas fa-hourglass-half"
+                                 style="color: #18bc9c; padding-right: 5px; font-size: 15px"></i>&nbsp; Duração: 1h00
                     </div>
 
                     <!-- Dificuldade -->
-                    <div style="padding: 5px"; >
+                    <div style="padding: 5px" ;>
                         <td style="vertical-align:middle;">
                             <i class="fas fa-dumbbell" style="color: #18bc9c; padding-right: 5px;"></i> Dificuldade:
                             <i class="fas fa-star" style="font-size:10px;"></i>
@@ -62,6 +107,18 @@
                         <i class="fas fa-balance-scale" style="color: #18bc9c; padding-right: 5px;"></i> Dose: 1 Dose
                     </div>
                 </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 " style="margin-top: 20px; padding-top: 10px">
+                <h5 class="text-center text-uppercase text-secondary mb-0">Modo de Preparação: </h5>
+                <br>
+                <p>1. Passo 1</p>
+                <p>2. Passo 2</p>
+                <p>3. Passo 3</p>
+                <p>4. Passo 4</p>
 
             </div>
         </div>

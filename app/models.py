@@ -42,3 +42,13 @@ class Comentario(models.Model):
 
     def __str__(self):
         return self.comentario
+
+
+class ReceitasGuardadas(models.Model):
+    receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
+    utilizador = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.utilizador + " > " + self.receita
+
+

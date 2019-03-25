@@ -1,6 +1,6 @@
 ﻿<!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -10,98 +10,105 @@
 
     {% load staticfiles %}
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'content/bootstrap.min.css' %}"/>
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" href="{% static 'content/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'content/site.css' %}"/>
 
     <!-- Custom fonts for this template -->
     <link rel="stylesheet" type="text/css" href="{% static 'content/all.min.css' %}">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" >
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-      <!-- Plugin CSS -->
+    <!-- Plugin CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'content/magnific-popup.css' %}">
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static 'content/freelancer.min.css' %}">
 
-  </head>
 
-  <body id="page-top">
+</head>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="{% url 'home' %}">Pitadinha</a>
-      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Receitas
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Sopas</a>
-              <a class="dropdown-item" href="#">Carnes</a>
-              <a class="dropdown-item" href="#">Peixes</a>
-              <a class="dropdown-item" href="#">Sobremesas</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <div class="input-group  my-2 my-lg-0">
-            <div class="input-group-prepend">
-              <div class="input-group-text"><i class="fas fa-search" style="color: #18bc9c"></i></div>
-            </div>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          </div>
-        </form>
-        {% include 'loginPartial.html' %}
-      </div>
+        <a class="navbar-brand js-scroll-trigger" href="{% url 'home' %}">Pitadinha</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button"
+                data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Receitas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Sopas</a>
+                        <a class="dropdown-item" href="#">Carnes</a>
+                        <a class="dropdown-item" href="#">Peixes</a>
+                        <a class="dropdown-item" href="#">Sobremesas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group  my-2 my-lg-0">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-search" style="color: #18bc9c"></i></div>
+                    </div>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </form>
+            {% include 'loginPartial.html' %}
+        </div>
+
     </div>
-    </nav>
+</nav>
 
-    <main role="main">
-        <!--<div class="container body-content">-->
-        <div>
-            <p></p>
-            <!-- Header -->
+<main role="main">
+    <!--<div class="container body-content">-->
+    <div>
+        <p></p>
+        <!-- Header -->
 
-            {% block content %} {% endblock %}
-        </div> <!-- /container -->
-    </main>
+        {% block content %} {% endblock %}
+    </div> <!-- /container -->
+</main>
 
-    <footer>
-        <hr />
-        <p>&copy; {{ year }} - My Django Application</p>
-    </footer>
+<footer>
+    <hr/>
+    <p>&copy; {{ year }} - My Django Application</p>
+</footer>
 
-    <!-- JQuery and Bootstrap core
-    ================================================== -->
+<!-- JQuery and Bootstrap core
+================================================== -->
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'scripts/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'scripts/jquery.magnific-popup.min.js' %}"></script>
+<!-- Plugin JavaScript -->
+<script src="{% static 'scripts/jquery.easing.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.magnific-popup.min.js' %}"></script>
 
-    <!-- Custom scripts for this template -->
-    <script src="{% static 'scripts/freelancer.min.js' %}"></script>
+<!-- Custom scripts for this template -->
+<script src="{% static 'scripts/freelancer.min.js' %}"></script>
 
-  <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{% static 'scripts/jquery-3.3.1.slim.min.js' %}"></script>
-    <script src="{% static 'scripts/popper.min.js' %}"></script>
-    <script src="{% static 'scripts/bootstrap.min.js' %}"></script>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{% static 'scripts/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'scripts/popper.min.js' %}"></script>
+<script src="{% static 'scripts/bootstrap.min.js' %}"></script>
 
-    <script src="{% static 'scripts/popoverAccount.js' %}"></script>
-
-  </body>
+<script src="{% static 'scripts/popoverAccount.js' %}"></script>
+{% block scripts %}{% endblock %}
+</body>
 </html>

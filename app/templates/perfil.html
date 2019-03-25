@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 40px">
+
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="../static/imgs/account.png" class="rounded-circle img-fluid mx-auto d-block" style="width: 60%; margin-top: 40px;" />
+                <h6 style="color: #2C3E50"><p align="center"> {{ user.get_username }} </p></h6>
+            </div>
+            <div class="col-sm-10" style="margin-top: 60px">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#minhasreceitas" role="tab"
+                           aria-controls="home"
+                           aria-selected="true">As minhas Receitas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#receitasguardadas" role="tab"
+                           aria-controls="profile"
+                           aria-selected="false">Receitas Guardadas</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="minhasreceitas" role="tabpanel" aria-labelledby="home-tab">
+                        {% include 'minhasReceitas.html' %}
+                    </div>
+                    <div class="tab-pane fade" id="receitasguardadas" role="tabpanel" aria-labelledby="profile-tab">
+                        {% include 'receitasguardadas.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+{% endblock %}

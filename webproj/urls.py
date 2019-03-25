@@ -22,8 +22,9 @@ from app import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('contact/', views.contact, name='contact'),
-    path('about/', views.about, name='about'),
+
+    path('perfil/', views.perfil, name='perfil'),
+
     path('receita/', views.receita, name='receita'),
     path('addReceita/', views.adicionarReceita, name='addReceita'),
     #path('addIngrediente/', views.adicionarIngredientesReceita, name='addIngrediente'),
@@ -34,8 +35,5 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
 
     path('admin/', admin.site.urls),
-
-    #path('accounts/signup', views.signup, name='signup'),
-    #path('accounts/', include('django.contrib.auth.urls')),
 ]
 

@@ -21,33 +21,6 @@ def home(request):
     return render(request, 'index.html', tparams)
 
 
-def contact(request):
-    """Renders the contact page."""
-    assert isinstance(request, HttpRequest)
-    tparams = {
-        'title': 'Contact',
-        'message': 'Your contact page.',
-        'year': datetime.now().year,
-    }
-    return render(request, 'contact.html', tparams)
-
-
-def about(request):
-    assert isinstance(request, HttpRequest)
-    tparams = {
-        'title': 'About',
-        'message': 'Your application description page.',
-        'year': datetime.now().year,
-    }
-    return render(request, 'about.html', tparams)
-
-
-def receita(request):
-    assert isinstance(request, HttpRequest)
-
-    return render(request, 'receita.html')
-
-
 def signup(request):
     if request.method == 'POST':
         f = UserCreationForm(request.POST)
@@ -66,6 +39,23 @@ def signup(request):
         f = UserCreationForm()
 
     return render(request, 'signup.html', {'form': f})
+
+
+def perfil(request):
+    """Renders the contact page."""
+    assert isinstance(request, HttpRequest)
+
+    return render(request, 'perfil.html')
+
+
+def receita(request):
+    assert isinstance(request, HttpRequest)
+
+    if request.method == 'POST':
+        # passar por parametro a class no booksave
+        print('olaaa')
+
+    return render(request, 'receita.html')
 
 
 def adicionarReceita(request):
