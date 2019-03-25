@@ -4,6 +4,7 @@ from django.db import models
 class Receita(models.Model):
     nome = models.CharField(max_length=70)
     descricao = models.CharField(max_length=500)
+    tipo = models.CharField(max_length=50)
     preparacao = models.CharField(max_length=3000)
     tempo = models.IntegerField()
     dificuldade = models.CharField(max_length=10)
