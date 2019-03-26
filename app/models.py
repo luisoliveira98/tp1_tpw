@@ -9,9 +9,10 @@ class Receita(models.Model):
     tempo = models.IntegerField()
     dificuldade = models.CharField(max_length=10)
     dose = models.IntegerField()
-    imagem = models.CharField(max_length=50)
+    imagem = models.ImageField(upload_to='static/portfolio')
     data = models.DateField()
     utilizador = models.CharField(max_length=100)
+    classificacao = models.IntegerField()
 
     def __str__(self):
         return self.nome
@@ -23,7 +24,7 @@ class Ingredientes(models.Model):
     ingredienteQuant = models.FloatField()
 
     def __str__(self):
-        return self.ingredienteName + self.ingredienteQuant
+        return self.ingredienteName
 
 
 class Tags(models.Model):

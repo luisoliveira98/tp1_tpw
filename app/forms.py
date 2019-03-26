@@ -1,8 +1,6 @@
 from django import forms
-from django.forms import formset_factory
 
-
-class AdicionarReceita(forms.Form):
+class AddReceita(forms.Form):
     TYPES = [
         ('carne', 'Carne'),
         ('peixe', 'Peixe'),
@@ -23,14 +21,27 @@ class AdicionarReceita(forms.Form):
     preparacao = forms.CharField(label="Passos de preparação:", max_length=3000, widget=forms.Textarea)
     tempo = forms.IntegerField(min_value=0, label="Tempo estimado (min.):", widget=forms.NumberInput)
     dificuldade = forms.ChoiceField(label="Dificuldade:", choices=CHOICES, widget=forms.RadioSelect)
-    dose = forms.FloatField(min_value=0, label="Dose:",  widget=forms.NumberInput)
-    nomeIngr = forms.CharField(label='Nome do ingrediente:', widget=forms.TextInput)
-    quantidadeIngr = forms.FloatField(label='Quantidade:', widget=forms.NumberInput(attrs={'step': '0.5'}))
+    dose = forms.FloatField(min_value=0, label="Dose:", widget=forms.NumberInput)
+    #imagem = forms.ImageField(label='Imagem')
+
+    def __init__(self, *args, **kwargs):
+        n = kwargs.pop('n')
+
+        super(AddReceita, self).__init__(*args, **kwargs)
+        for i in range(n):
+            self.fields['x' + i.__str__()] = forms.CharField(label='Nome do ingrediente:', max_length=100)
+            self.fields['y' + i.__str__()] = forms.IntegerField(label='Quantidade:', widget=forms.NumberInput(attrs={'step': '0.5'}))
+
+    def nome_ingredientes(self):
+        for nome, value in self.cleaned_data.items():
+            if nome.startswith('x'):
+                yield (self.fields['nome'].label, value)
+
+    def quat_ingredientes(self):
+        for nome, value in self.cleaned_data.items():
+            if nome.startswith('y'):
+                yield (self.fields['nome'].label, value)
 
 
-class AdicionarIngredientes(forms.Form):
-    nome = forms.CharField(label='Nome do ingrediente:', widget=forms.TextInput)
-    quantidade = forms.FloatField(label='Quantidade:', widget=forms.NumberInput(attrs={'step': '0.5'}))
-
-
-AdicionarReceitaSet = formset_factory(AdicionarReceita, extra=1)
+class Numero_ingredientes(forms.Form):
+    numero = forms.IntegerField(label='Número de ingredientes da receita:', widget=forms.NumberInput)
