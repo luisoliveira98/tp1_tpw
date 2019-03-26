@@ -42,7 +42,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Nome da Receita</h3>
+                <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">{{ nome }}</h3>
                 <hr class="star-dark mb-5" style="margin-top: 1.5rem">
             </div>
         </div>
@@ -53,16 +53,13 @@
                 <br>
 
                 <!-- Receita.Descrição -->
-                <p align="justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula
-                    eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi
-                    tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque
-                    purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.
+                <p align="justify">{{ descricao }}
                 </p>
             </div>
             <div class="col-sm-6">
 
                 <!-- Receita.Imagem-->
-                <img class="img-fluid" src="../static/portfolio/food1.jpg" style="border-radius: 10px"/>
+                <img class="img-fluid" src="{{ imagem }}" style="border-radius: 10px"/>
             </div>
         </div>
 
@@ -70,13 +67,17 @@
             <div class="col-sm-6 align-self-center" style="margin-top: 20px">
 
                 <div style="border:3px solid #18bc9c; border-radius: 10px; padding: 10px 10px 10px 10px;">
-                    <h5 class="text-center text-uppercase text-secondary mb-0">Ingredientes</h5>
+                    <h5 class="text-center text-uppercase text-secondary mb-0" style="padding-bottom: 1rem">Ingredientes</h5>
 
-                    <p align="center"><br><i class="fas fa-angle-right" style="font-size: 15px; color: #18bc9c;"></i><b>&nbsp;&nbsp;Alimento: </b>
-                        quant&nbsp;&nbsp;<i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i></p>
-                    <p align="center" style="margin-top: -25px"><br><i class="fas fa-angle-right"
-                                                                       style="font-size: 15px; color: #18bc9c;"></i><b>&nbsp;&nbsp;Alimento: </b>
-                        quant&nbsp;&nbsp;<i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i></p>
+
+                    {% for ingrediente in listIngredientes %}
+                        <p align="center" style="margin-bottom: 0.5rem">
+                            <i class="fas fa-angle-right" style="font-size: 15px; color: #18bc9c;"></i>
+                            <b>&nbsp;&nbsp;{{ ingrediente.ingredienteName }}: </b>
+                            {{ ingrediente.ingredienteQuant }}&nbsp;&nbsp;
+                            <i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i>
+                        </p>
+                    {% endfor %}
                 </div>
 
 
@@ -86,25 +87,20 @@
                     <!-- Duração -->
                     <div style="padding: 5px">
                         &nbsp;<i class="fas fa-hourglass-half"
-                                 style="color: #18bc9c; padding-right: 5px; font-size: 15px"></i>&nbsp; Duração: 1h00
+                                 style="color: #18bc9c; padding-right: 5px; font-size: 15px"></i>&nbsp; <b>Duração:</b> &nbsp;{{ duracao }} min
                     </div>
 
                     <!-- Dificuldade -->
                     <div style="padding: 5px" ;>
                         <td style="vertical-align:middle;">
-                            <i class="fas fa-dumbbell" style="color: #18bc9c; padding-right: 5px;"></i> Dificuldade:
-                            <i class="fas fa-star" style="font-size:10px;"></i>
-                            <i class="fas fa-star" style="font-size:10px;"></i>
-                            <i class="fas fa-star" style="font-size:10px;"></i>
-                            <i class="far fa-star" style="font-size:10px;"></i>
-                            <i class="far fa-star" style="font-size:10px;"></i>
+                            <i class="fas fa-dumbbell" style="color: #18bc9c; padding-right: 5px;"></i> <b>Dificuldade:</b> &nbsp;{{ dificuldade }}
                         </td>
                     </div>
 
                     <!-- Dose -->
                     <div style="padding: 5px">
                         <!-- Receita.Dose -->
-                        <i class="fas fa-balance-scale" style="color: #18bc9c; padding-right: 5px;"></i> Dose: 1 Dose
+                        <i class="fas fa-balance-scale" style="color: #18bc9c; padding-right: 5px;"></i> <b>Dose:</b> {{ dose }} dose(s)
                     </div>
                 </div>
 

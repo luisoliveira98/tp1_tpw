@@ -14,9 +14,11 @@ from datetime import datetime
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+
+    listaReceitas = Receita.objects.all()
+
     tparams = {
-        'title': 'Home Page',
-        'year': datetime.now().year,
+        'listaReceitas': listaReceitas,
     }
     return render(request, 'index.html', tparams)
 
@@ -42,8 +44,21 @@ def about(request):
     return render(request, 'about.html', tparams)
 
 
-def receita(request):
+def receita(request, id):
     assert isinstance(request, HttpRequest)
+
+    receita = Receita.objects.get(id=id)
+    listIngredientes = Ingredientes.objects.filter(receita=receita)
+
+    tparams = {
+        'nome': receita.nome,
+        'descricao': receita.descricao,
+        'imagem': '/media/'+str(receita.imagem),
+        'duracao': receita.tempo,
+        'dificuldade': receita.dificuldade,
+        'dose': receita.dose,
+        'listIngredientes': listIngredientes,
+    }
 
     #verificar se ela já está guardada, e enviar class necessária
 
@@ -51,7 +66,7 @@ def receita(request):
         # passar por parametro a class no booksave
         print('olaaa')
 
-    return render(request, 'receita.html')
+    return render(request, 'receita.html', tparams)
 
 
 def signup(request):
@@ -72,6 +87,7 @@ def signup(request):
         f = UserCreationForm()
 
     return render(request, 'signup.html', {'form': f})
+
 
 def criar_receita(request, numero):
     print(numero)
@@ -106,6 +122,7 @@ def criar_receita(request, numero):
         form = AddReceita(n=numero)
     return render(request, 'criarReceita.html', {'form': form, 'range': range(numero)})
 
+
 def numero_ingredientes(request):
     print('aqui')
     if request.method == 'POST':
@@ -116,6 +133,7 @@ def numero_ingredientes(request):
     else:
         form = Numero_ingredientes()
     return render(request, 'numeroIngredientes.html', {'form': form})
+
 
 def perfil(request):
     """Renders the contact page."""
