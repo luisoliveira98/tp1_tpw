@@ -22,6 +22,7 @@ class Ingredientes(models.Model):
     receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
     ingredienteName = models.CharField(max_length=100)
     ingredienteQuant = models.FloatField()
+    unidade = models.CharField(max_length=50)
 
     def __str__(self):
         return self.ingredienteName

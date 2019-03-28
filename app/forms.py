@@ -22,7 +22,7 @@ class AddReceita(forms.Form):
     tempo = forms.IntegerField(min_value=0, label="Tempo estimado (min.):", widget=forms.NumberInput)
     dificuldade = forms.ChoiceField(label="Dificuldade:", choices=CHOICES, widget=forms.RadioSelect)
     dose = forms.FloatField(min_value=0, label="Dose:", widget=forms.NumberInput)
-    #imagem = forms.ImageField(label='Imagem')
+    imagem = forms.ImageField(label='Imagem')
 
     def __init__(self, *args, **kwargs):
         n = kwargs.pop('n')

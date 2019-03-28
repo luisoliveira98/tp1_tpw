@@ -104,11 +104,12 @@ def signup(request):
     return render(request, 'signup.html', {'form': f})
 
 
-def criar_receita(request, numero):
+'''def criar_receita(request, numero):
     print(numero)
     if request.method == 'POST':
         print('aqui!')
         form = AddReceita(request.POST, request.FILES,  n=numero)
+        print(form.is_valid())
         if form.is_valid():
             print('aqui')
             nome = form.cleaned_data.get('nome')
@@ -118,9 +119,9 @@ def criar_receita(request, numero):
             dificuldade = form.cleaned_data.get('dificuldade')
             tempo = form.cleaned_data.get('tempo')
             dose = form.cleaned_data.get('dose')
-            #imagem = form.cleaned_data.get('imagem')
+            imagem = form.cleaned_data.get('imagem')
 
-            receita = Receita(nome=nome, descricao=descricao, dificuldade=dificuldade, preparacao=passos, tipo=tipo, tempo=tempo, dose=dose, imagem='', data=datetime.now().strftime('%Y-%m-%d'), utilizador='luis', classificacao=0)
+            receita = Receita(nome=nome, descricao=descricao, dificuldade=dificuldade, preparacao=passos, tipo=tipo, tempo=tempo, dose=dose, imagem=imagem, data=datetime.now().strftime('%Y-%m-%d'), utilizador='luis', classificacao=0)
             receita.save()
             lst_ingredientes = []
             lst_quantidades = []
@@ -147,7 +148,38 @@ def numero_ingredientes(request):
             return redirect('criarReceita', numero=numero)
     else:
         form = Numero_ingredientes()
-    return render(request, 'numeroIngredientes.html', {'form': form})
+    return render(request, 'numeroIngredientes.html', {'form': form})'''
+
+def criar_receita(request):
+    if request.method == 'POST':
+        nome = request.POST['nome']
+        descricao = request.POST['descricao']
+        passos = request.POST['passos']
+        tipo = request.POST['tipoReceita']
+        dificuldade = request.POST['dificuldade']
+        tempo = request.POST['tempo']
+        dose = request.POST['dose']
+        imagem = request.FILES['imagem']
+        receita = Receita(nome=nome, descricao=descricao, dificuldade=dificuldade, preparacao=passos, tipo=tipo, tempo=tempo, dose=dose, imagem=imagem, data=datetime.now().strftime('%Y-%m-%d'), utilizador='luis', classificacao=0)
+        receita.save()
+        lst_ingredientes = []
+        lst_quantidades = []
+        lst_unidades = []
+        for key in request.POST:
+            if key.startswith('ing-'):
+                lst_ingredientes.append(request.POST[key])
+            elif key.startswith('qt-'):
+                lst_quantidades.append(request.POST[key])
+            elif key.startswith('un-'):
+                lst_unidades.append(request.POST[key])
+
+        for i in range(len(lst_quantidades)):
+            ing = Ingredientes(receita=receita, ingredienteName=lst_ingredientes[i],
+                               ingredienteQuant=lst_quantidades[i], unidade=lst_unidades[i])
+            ing.save()
+        return redirect('home')
+
+    return render(request, 'testForm.html')
 
 
 def perfil(request):
@@ -165,6 +197,8 @@ def perfil(request):
     }
 
     return render(request, 'perfil.html', tparams)
+
+
 
 
 
