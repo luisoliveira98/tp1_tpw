@@ -160,7 +160,7 @@ def criar_receita(request):
         tempo = request.POST['tempo']
         dose = request.POST['dose']
         imagem = request.FILES['imagem']
-        receita = Receita(nome=nome, descricao=descricao, dificuldade=dificuldade, preparacao=passos, tipo=tipo, tempo=tempo, dose=dose, imagem=imagem, data=datetime.now().strftime('%Y-%m-%d'), utilizador='luis', classificacao=0)
+        receita = Receita(nome=nome, descricao=descricao, dificuldade=dificuldade, preparacao=passos, tipo=tipo, tempo=tempo, dose=dose, imagem=imagem, data=datetime.now().strftime('%Y-%m-%d'), utilizador=request.user, classificacao=0)
         receita.save()
         lst_ingredientes = []
         lst_quantidades = []
