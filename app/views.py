@@ -23,27 +23,6 @@ def home(request):
     return render(request, 'index.html', tparams)
 
 
-def contact(request):
-    """Renders the contact page."""
-    assert isinstance(request, HttpRequest)
-    tparams = {
-        'title': 'Contact',
-        'message': 'Your contact page.',
-        'year': datetime.now().year,
-    }
-    return render(request, 'contact.html', tparams)
-
-
-def about(request):
-    assert isinstance(request, HttpRequest)
-    tparams = {
-        'title': 'About',
-        'message': 'Your application description page.',
-        'year': datetime.now().year,
-    }
-    return render(request, 'about.html', tparams)
-
-
 def receita(request, id):
     assert isinstance(request, HttpRequest)
 
@@ -51,7 +30,7 @@ def receita(request, id):
     listIngredientes = Ingredientes.objects.filter(receita=receita)
     preparacaoPassos = re.split(re.compile('[0-9]\. '), receita.preparacao)
 
-    saved = ReceitasGuardadas.objects.filter(receita=receita)
+    saved = ReceitasGuardadas.objects.filter(receita=receita, utilizador=request.user)
 
     if not saved:
         booksave = "far fa-bookmark"
@@ -60,14 +39,15 @@ def receita(request, id):
 
     if request.method == 'POST':
         if saved:
-            print("entrei if")
             ReceitasGuardadas.objects.get(receita=receita).delete()
             booksave = "far fa-bookmark"
         else:
-            print("entrei else")
             new = ReceitasGuardadas(receita=receita, utilizador=request.user)
             new.save()
             booksave = "fas fa-bookmark"
+
+    if request.method == 'GET':
+        print("heyyyyyyyyyyyyyyyyyyyyyyyyy")
 
     tparams = {
         'nome': receita.nome,
@@ -103,52 +83,6 @@ def signup(request):
 
     return render(request, 'signup.html', {'form': f})
 
-
-'''def criar_receita(request, numero):
-    print(numero)
-    if request.method == 'POST':
-        print('aqui!')
-        form = AddReceita(request.POST, request.FILES,  n=numero)
-        print(form.is_valid())
-        if form.is_valid():
-            print('aqui')
-            nome = form.cleaned_data.get('nome')
-            descricao = form.cleaned_data.get('descricao')
-            passos = form.cleaned_data.get('preparacao')
-            tipo = form.cleaned_data.get('tipo')
-            dificuldade = form.cleaned_data.get('dificuldade')
-            tempo = form.cleaned_data.get('tempo')
-            dose = form.cleaned_data.get('dose')
-            imagem = form.cleaned_data.get('imagem')
-
-            receita = Receita(nome=nome, descricao=descricao, dificuldade=dificuldade, preparacao=passos, tipo=tipo, tempo=tempo, dose=dose, imagem=imagem, data=datetime.now().strftime('%Y-%m-%d'), utilizador='luis', classificacao=0)
-            receita.save()
-            lst_ingredientes = []
-            lst_quantidades = []
-            for (value, ingrediente) in form.nome_ingredientes():
-                lst_ingredientes.append(ingrediente)
-            for (value, quantidade) in form.quat_ingredientes():
-                lst_quantidades.append(quantidade)
-
-            for i in range(len(lst_quantidades)):
-                ing = Ingredientes(receita=receita, ingredienteName=lst_ingredientes[i], ingredienteQuant=lst_quantidades[i])
-                ing.save()
-            return HttpResponse('Success')
-    else:
-        form = AddReceita(n=numero)
-    return render(request, 'criarReceita.html', {'form': form, 'range': range(numero)})
-
-
-def numero_ingredientes(request):
-    print('aqui')
-    if request.method == 'POST':
-        form = Numero_ingredientes(request.POST)
-        if form.is_valid():
-            numero = form.cleaned_data.get('numero')
-            return redirect('criarReceita', numero=numero)
-    else:
-        form = Numero_ingredientes()
-    return render(request, 'numeroIngredientes.html', {'form': form})'''
 
 def criar_receita(request):
     if request.method == 'POST':

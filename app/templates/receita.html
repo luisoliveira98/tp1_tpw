@@ -29,12 +29,27 @@
     <div class="container body-content">
 
         {% if request.user.is_authenticated %}
-            <form id="logoutForm" action="." method="POST" >
+            <form id="save" action="." method="POST" >
                 {% csrf_token %}
                 <button
                         name='save'
                         id="x"
                         class="{{ booksaveclass }}"
+                        type="submit"
+                        style=" font-size: 30px;
+                                color: #2C3E50;
+                                background-color:transparent;
+                                border-color:transparent;
+                                float: right;
+                                margin-top: 65px;">
+                </button>
+            </form>
+            <form id="like" action="." method="GET" >
+                {% csrf_token %}
+                <button
+                        name='save'
+                        id="x"
+                        class="far fa-heart"
                         type="submit"
                         style=" font-size: 30px;
                                 color: #2C3E50;
@@ -81,7 +96,7 @@
                         <p align="center" style="margin-bottom: 0.5rem">
                             <i class="fas fa-angle-right" style="font-size: 15px; color: #18bc9c;"></i>
                             <b>&nbsp;&nbsp;{{ ingrediente.ingredienteName }}: </b>
-                            {{ ingrediente.ingredienteQuant }}&nbsp;&nbsp;
+                            {{ ingrediente.ingredienteQuant }}&nbsp;&nbsp;{{ ingrediente.unidade }} &nbsp;&nbsp;
                             <i class="fas fa-angle-left" style="font-size: 15px; color: #18bc9c;"></i>
                         </p>
                     {% endfor %}
