@@ -2,17 +2,21 @@
 {% block content %}
 
     <div class="container body-content">
-        <!-- FOR -->
-        <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px">
-            <div class="media">
-            <img src="../static/portfolio/food1.jpg" class="align-self-center mr-3" alt="..." style="width: 15%">
-            <div class="media-body">
-                <h5 class="mt-0">Media heading</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-                odio, vestibulum in vulputate at, tempus viverra turpis.
-            </div>
-        </div>
-        </div>
+        {% if inforeceitasguardadas %}
+            {% for receitaguardada in inforeceitasguardadas %}
+                <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px" onclick="location.href='{% url 'receita' receitaguardada.receita.id  %}'">
+                    <div class="media">
+                        <img src="/media/{{ receitaguardada.receita.imagem }}" class="align-self-center mr-3" alt="..." style="width: 15%">
+                        <div class="media-body">
+                            <h5 class="mt-0">{{ receitaguardada.receita.nome }}</h5>
+                            {{ receitaguardada.receita.descricao }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="margin-top: 20px">Ainda não guardou nenhuma receita! </p>
+        {% endif %}
     </div>
 
 {% endblock %}

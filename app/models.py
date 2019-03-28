@@ -50,6 +50,6 @@ class ReceitasGuardadas(models.Model):
     utilizador = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.utilizador + " > " + self.receita
+        return self.utilizador + " > " + self.receita.nome
 
 

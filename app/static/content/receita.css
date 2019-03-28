@@ -1,0 +1,31 @@
+.instructions-list li {
+ margin-bottom:20px
+}
+.instructions-list li .instruction {
+ overflow:auto;
+ font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+ font-size:16px
+}
+.instructions-list li .instruction .instruction-index {
+ font-weight:700
+}
+.instructions-list li a.instruction-check {
+ background:#fff;
+ float:left;
+ border:3px solid #929fad;
+ -webkit-border-radius:50% 50% 50% 50%;
+ -moz-border-radius:50% 50% 50% 50%;
+ -ms-border-radius:50% 50% 50% 50%;
+ border-radius:50% 50% 50% 50%;
+ display:inline-block;
+ width:24px;
+ height:24px;
+ margin:4px 12px 0 0
+}
+.instructions-list li a.instruction-check.active {
+ background:#18bc9c url('../imgs/sprite-recipe.png') -23px -35px no-repeat;
+ border:3px solid #18bc9c
+}
+.instructions-list li a.instruction-check:hover:not(.active) {
+ background:#dee1e6
+}

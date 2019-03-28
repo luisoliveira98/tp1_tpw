@@ -24,10 +24,10 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="minhasreceitas" role="tabpanel" aria-labelledby="home-tab">
-                        {% include 'minhasReceitas.html' %}
+                        {% include 'minhasReceitas.html' with info=infominhasreceitas %}
                     </div>
                     <div class="tab-pane fade" id="receitasguardadas" role="tabpanel" aria-labelledby="profile-tab">
-                        {% include 'receitasguardadas.html' %}
+                        {% include 'receitasguardadas.html' with info=inforeceitasguardadas %}
                     </div>
                 </div>
             </div>

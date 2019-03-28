@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from datetime import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
+import re
 from app.forms import *
 from app.models import *
 
@@ -49,6 +49,25 @@ def receita(request, id):
 
     receita = Receita.objects.get(id=id)
     listIngredientes = Ingredientes.objects.filter(receita=receita)
+    preparacaoPassos = re.split(re.compile('[0-9]\. '), receita.preparacao)
+
+    saved = ReceitasGuardadas.objects.filter(receita=receita)
+
+    if not saved:
+        booksave = "far fa-bookmark"
+    else:
+        booksave = "fas fa-bookmark"
+
+    if request.method == 'POST':
+        if saved:
+            print("entrei if")
+            ReceitasGuardadas.objects.get(receita=receita).delete()
+            booksave = "far fa-bookmark"
+        else:
+            print("entrei else")
+            new = ReceitasGuardadas(receita=receita, utilizador=request.user)
+            new.save()
+            booksave = "fas fa-bookmark"
 
     tparams = {
         'nome': receita.nome,
@@ -58,13 +77,9 @@ def receita(request, id):
         'dificuldade': receita.dificuldade,
         'dose': receita.dose,
         'listIngredientes': listIngredientes,
+        'preparacao': preparacaoPassos[1:],
+        'booksaveclass': booksave,
     }
-
-    #verificar se ela já está guardada, e enviar class necessária
-
-    if request.method == 'POST':
-        # passar por parametro a class no booksave
-        print('olaaa')
 
     return render(request, 'receita.html', tparams)
 
@@ -136,10 +151,20 @@ def numero_ingredientes(request):
 
 
 def perfil(request):
-    """Renders the contact page."""
     assert isinstance(request, HttpRequest)
 
-    return render(request, 'perfil.html')
+    minhasReceitas = Receita.objects.filter(utilizador=request.user)
+    receitasGuardadas = ReceitasGuardadas.objects.filter(utilizador=request.user)
+
+    print(minhasReceitas)
+    print(receitasGuardadas)
+
+    tparams = {
+        'infominhasreceitas': minhasReceitas,
+        'inforeceitasguardadas': receitasGuardadas
+    }
+
+    return render(request, 'perfil.html', tparams)
 
 
 

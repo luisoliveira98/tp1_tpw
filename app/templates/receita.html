@@ -7,13 +7,20 @@
         });
 
         $('#x').click(function () {
-            console.log("ola");
+
             if ($(this).hasClass("far")) {
                 $(this).addClass("fas").removeClass("far");
             } else {
                 $(this).addClass("far").removeClass("fas");
             }
         });
+
+        $('a').click(function () {
+            console.log("ola");
+            $(this).toggleClass("active");
+        })
+
+
     </script>
 {% endblock %}
 
@@ -27,7 +34,7 @@
                 <button
                         name='save'
                         id="x"
-                        class="fas fa-bookmark"
+                        class="{{ booksaveclass }}"
                         type="submit"
                         style=" font-size: 30px;
                                 color: #2C3E50;
@@ -109,12 +116,19 @@
 
         <div class="row">
             <div class="col-sm-12 " style="margin-top: 20px; padding-top: 10px">
-                <h5 class="text-center text-uppercase text-secondary mb-0">Modo de Preparação: </h5>
+                <h5 class="text-center text-uppercase text-secondary mb-0">Modo de Preparação </h5>
                 <br>
-                <p>1. Passo 1</p>
-                <p>2. Passo 2</p>
-                <p>3. Passo 3</p>
-                <p>4. Passo 4</p>
+
+                <ul class="instructions-list" style="list-style-type: none; padding-left: 0px">
+                    {% for passos in preparacao %}
+                        <li class="instruction-item">
+                            <a id="d" class="instruction-check"></a>
+                            <div class="instruction">
+                                <p  align="justify" style="margin-bottom: 7px; font-size: medium" class="instruction-body">{{ passos }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
 
             </div>
         </div>
