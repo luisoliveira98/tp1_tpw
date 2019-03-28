@@ -31,25 +31,40 @@ def receita(request, id):
     preparacaoPassos = re.split(re.compile('[0-9]\. '), receita.preparacao)
 
     saved = ReceitasGuardadas.objects.filter(receita=receita, utilizador=request.user)
+    liked = ReceitasGostadas.objects.filter(receita=receita, utilizador=request.user)
 
     if not saved:
         booksave = "far fa-bookmark"
     else:
         booksave = "fas fa-bookmark"
 
-    if request.method == 'POST':
-        if saved:
-            ReceitasGuardadas.objects.get(receita=receita).delete()
-            booksave = "far fa-bookmark"
-        else:
-            new = ReceitasGuardadas(receita=receita, utilizador=request.user)
-            new.save()
-            booksave = "fas fa-bookmark"
+    if not liked:
+        likeclass = "far fa-heart"
+    else:
+        likeclass = "fas fa-heart"
 
-    if request.method == 'GET':
-        print("heyyyyyyyyyyyyyyyyyyyyyyyyy")
+    if request.method == 'POST':
+        if 'save' in request.POST:
+            if saved:
+                ReceitasGuardadas.objects.get(receita=receita, utilizador=request.user).delete()
+                booksave = "far fa-bookmark"
+            else:
+                new = ReceitasGuardadas(receita=receita, utilizador=request.user)
+                new.save()
+                booksave = "fas fa-bookmark"
+        if 'like' in request.POST:
+            print("heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+            if liked:
+                ReceitasGostadas.objects.get(receita=receita, utilizador=request.user).delete()
+                likeclass = "far fa-heart"
+            else:
+                newLike = ReceitasGostadas(receita=receita, utilizador=request.user)
+                newLike.save()
+                likeclass = "fas fa-heart"
+
 
     tparams = {
+        'id':receita.id,
         'nome': receita.nome,
         'descricao': receita.descricao,
         'imagem': '/media/'+str(receita.imagem),
@@ -59,6 +74,7 @@ def receita(request, id):
         'listIngredientes': listIngredientes,
         'preparacao': preparacaoPassos[1:],
         'booksaveclass': booksave,
+        'likeclass': likeclass
     }
 
     return render(request, 'receita.html', tparams)

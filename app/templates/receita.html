@@ -43,13 +43,10 @@
                                 float: right;
                                 margin-top: 65px;">
                 </button>
-            </form>
-            <form id="like" action="." method="GET" >
-                {% csrf_token %}
                 <button
-                        name='save'
+                        name='like'
                         id="x"
-                        class="far fa-heart"
+                        class="{{ likeclass }}"
                         type="submit"
                         style=" font-size: 30px;
                                 color: #2C3E50;

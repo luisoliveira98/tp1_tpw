@@ -53,6 +53,7 @@ class ReceitasGuardadas(models.Model):
     def __str__(self):
         return self.utilizador + " > " + self.receita.nome
 
+
 class ReceitasGostadas(models.Model):
     receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
     utilizador = models.CharField(max_length=100)
