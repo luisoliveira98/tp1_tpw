@@ -30,7 +30,7 @@ class Ingredientes(models.Model):
 
 class Tags(models.Model):
     nome = models.CharField(max_length=50)
-    receitas = models.ManyToManyField(Receita)
+    receitas = models.ManyToManyField(Receita, blank=True)
 
     def __str__(self):
         return self.nome
@@ -47,6 +47,13 @@ class Comentario(models.Model):
 
 
 class ReceitasGuardadas(models.Model):
+    receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
+    utilizador = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.utilizador + " > " + self.receita.nome
+
+class ReceitasGostadas(models.Model):
     receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
     utilizador = models.CharField(max_length=100)
 
