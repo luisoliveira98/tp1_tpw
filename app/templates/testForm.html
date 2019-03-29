@@ -203,6 +203,19 @@
                 </div>
             </div>
 
+            <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Tags</h3>
+            <hr class="star-dark mb-5" style="margin-top: 1.5rem">
+
+            <div class="form-group row">
+                {% for tag in tags %}
+                <div class="col-4">
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="tags" value="{{ tag.nome }}">{{ tag.nome }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 {% endblock %}

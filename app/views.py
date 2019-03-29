@@ -104,7 +104,9 @@ def signup(request):
 
 
 def criar_receita(request):
+    tags = Tags.objects.all()
     if request.method == 'POST':
+        print(request.POST)
         nome = request.POST['nome']
         descricao = request.POST['descricao']
         passos = request.POST['passos']
@@ -130,9 +132,16 @@ def criar_receita(request):
             ing = Ingredientes(receita=receita, ingredienteName=lst_ingredientes[i],
                                ingredienteQuant=lst_quantidades[i], unidade=lst_unidades[i])
             ing.save()
-        return redirect('home')
 
-    return render(request, 'testForm.html')
+        for tag in request.POST.getlist('tags', []):
+            t = Tags.objects.get(nome=tag)
+            t.receitas.add(receita)
+
+        return redirect('home')
+    tparams = {
+        'tags': tags
+    }
+    return render(request, 'testForm.html', tparams)
 
 
 def perfil(request):
