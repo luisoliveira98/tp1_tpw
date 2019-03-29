@@ -15,7 +15,7 @@ def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
 
-    listaReceitas = Receita.objects.all()
+    listaReceitas = Receita.objects.order_by("-classificacao")[0:6]
 
     tparams = {
         'listaReceitas': listaReceitas,
@@ -53,13 +53,16 @@ def receita(request, id):
                 new.save()
                 booksave = "fas fa-bookmark"
         if 'like' in request.POST:
-            print("heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
             if liked:
                 ReceitasGostadas.objects.get(receita=receita, utilizador=request.user).delete()
+                receita.classificacao -= 1
+                receita.save()
                 likeclass = "far fa-heart"
             else:
                 newLike = ReceitasGostadas(receita=receita, utilizador=request.user)
                 newLike.save()
+                receita.classificacao += 1
+                receita.save()
                 likeclass = "fas fa-heart"
 
 
