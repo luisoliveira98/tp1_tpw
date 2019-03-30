@@ -9,55 +9,55 @@
 
         <form id="receita" action="." method="post" enctype="multipart/form-data">
             {% csrf_token %}
-                <div>
-                    <div class="form-group">
-                        {{ form.nome.label_tag }}
-                        <div>
-                            {{ form.nome | add_class:"formcontrol1" }}
-                        </div>
+            <div>
+                <div class="form-group">
+                    {{ form.nome.label_tag }}
+                    <div>
+                        {{ form.nome | add_class:"formcontrol1" }}
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <div class="form-group col">
-                            {{ form.descricao.label_tag }}
-                            <div>
-                                {{ form.descricao | add_class:"formcontrol1" }}
-                            </div>
-                        </div>
-                        <div class="form-group col">
-                            {{ form.preparacao.label_tag }}
-                            <div>
-                                {{ form.preparacao | add_class:"formcontrol1" }}
-                            </div>
+                <div class="form-group row">
+                    <div class="form-group col">
+                        {{ form.descricao.label_tag }}
+                        <div>
+                            {{ form.descricao | add_class:"formcontrol1" }}
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            {{ form.tipo.label_tag }}
-                            {{ form.tipo | add_class:"formcontrol1" }}
-                        </div>
-                        <div class="col">
-                            {{ form.dificuldade.label_tag }}
-                            {{ form.dificuldade | add_class:"formcontrol1" }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            {{ form.tempo.label_tag }}
-                            {{ form.tempo | add_class:"formcontrol1" }}
-                        </div>
-                        <div class="col">
-                            {{ form.dose.label_tag }}
-                            {{ form.dose | add_class:"formcontrol1" }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            {{ form.imagem.label_tag }}
-                            {{ form.imagem | add_class:"formcontrol1" }}
+                    <div class="form-group col">
+                        {{ form.preparacao.label_tag }}
+                        <div>
+                            {{ form.preparacao | add_class:"formcontrol1" }}
                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col">
+                        {{ form.tipo.label_tag }}
+                        {{ form.tipo | add_class:"formcontrol1" }}
+                    </div>
+                    <div class="col">
+                        {{ form.dificuldade.label_tag }}
+                        {{ form.dificuldade | add_class:"formcontrol1" }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col">
+                        {{ form.tempo.label_tag }}
+                        {{ form.tempo | add_class:"formcontrol1" }}
+                    </div>
+                    <div class="col">
+                        {{ form.dose.label_tag }}
+                        {{ form.dose | add_class:"formcontrol1" }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col">
+                        {{ form.imagem.label_tag }}
+                        {{ form.imagem | add_class:"formcontrol1" }}
+                    </div>
+                </div>
+            </div>
 
             <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Adicionar Ingredientes</h3>
             <hr class="star-dark mb-5" style="margin-top: 1.5rem">

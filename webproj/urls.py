@@ -41,6 +41,8 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
 
     path('admin/', admin.site.urls),
+
+    path('test/', views.test, name='test')
 ]
 
 if settings.DEBUG:

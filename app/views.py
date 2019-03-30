@@ -104,6 +104,7 @@ def signup(request):
 
 
 def criar_receita(request):
+    assert isinstance(request, HttpRequest)
     if request.method == 'POST':
         nome = request.POST['nome']
         descricao = request.POST['descricao']
@@ -132,7 +133,12 @@ def criar_receita(request):
             ing.save()
         return redirect('home')
 
-    return render(request, 'testForm.html')
+    tparams = {
+        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
+        'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil']
+    }
+
+    return render(request, 'testForm.html', tparams)
 
 
 def perfil(request):
@@ -152,6 +158,16 @@ def perfil(request):
     return render(request, 'perfil.html', tparams)
 
 
+def test(request):
+    """Renders the home page."""
+    assert isinstance(request, HttpRequest)
+
+    tparams = {
+        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
+        'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil']
+    }
+
+    return render(request, 'test.html', tparams)
 
 
 
