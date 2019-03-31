@@ -45,16 +45,16 @@ function validateForm() {
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByTagName("input");
+  y = x[currentTab].getElementsByTagName("input")
+  //y.push(x[currentTab].getElementsByTagName("textarea"));
   console.log(y)
 
-  /*
   for (i = 0; i < y.length; i++) {
     if (y[i].value == "") {
       y[i].className += " invalid";
       valid = false;
     }
-  }*/
+  }
 
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {

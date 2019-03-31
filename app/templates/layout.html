@@ -54,21 +54,23 @@
                         Receitas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Sopas</a>
-                        <a class="dropdown-item" href="#">Carnes</a>
-                        <a class="dropdown-item" href="#">Peixes</a>
-                        <a class="dropdown-item" href="#">Sobremesas</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'sopa' %}">Sopas</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'carne' %}">Carnes</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'peixe' %}">Peixes</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'sobremesa' %}">Sobremesas</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'vegetariano' %}">Vegetariano</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0" action="/pesquisa" method="post">
+                {% csrf_token %}.
                 <div class="input-group  my-2 my-lg-0">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fas fa-search" style="color: #18bc9c"></i></div>
                     </div>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search">
                 </div>
             </form>
             {% include 'loginPartial.html' %}

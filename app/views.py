@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.http import HttpRequest, HttpResponse
-from datetime import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 import re
@@ -105,6 +104,7 @@ def signup(request):
 
 def criar_receita(request):
     assert isinstance(request, HttpRequest)
+    tags = Tags.objects.all()
     if request.method == 'POST':
         nome = request.POST['nome']
         descricao = request.POST['descricao']
@@ -131,14 +131,20 @@ def criar_receita(request):
             ing = Ingredientes(receita=receita, ingredienteName=lst_ingredientes[i],
                                ingredienteQuant=lst_quantidades[i], unidade=lst_unidades[i])
             ing.save()
+
+        for tag in request.POST.getlist('tags', []):
+            t = Tags.objects.get(nome=tag)
+            t.receitas.add(receita)
+
         return redirect('home')
 
     tparams = {
         'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
-        'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil']
+        'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'],
+        'tags': tags
     }
 
-    return render(request, 'testForm.html', tparams)
+    return render(request, 'adicionarReceita.html', tparams)
 
 
 def perfil(request):
@@ -158,17 +164,31 @@ def perfil(request):
     return render(request, 'perfil.html', tparams)
 
 
-def test(request):
-    """Renders the home page."""
-    assert isinstance(request, HttpRequest)
+def receita_tipo(request, tipo : str):
+    print(tipo)
+    receitas = Receita.objects.filter(tipo=tipo)
+    print(receitas)
 
     tparams = {
-        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
-        'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil']
+        'tipo': tipo,
+        'listaReceitas': receitas
     }
+    return render(request, 'receitasTipo.html', tparams)
 
-    return render(request, 'test.html', tparams)
+def pesquisa(request):
+    query=''
+    tags = Tags.objects.all()
+    if request.method=='POST':
+        if 'query' in request.POST:
+            query = request.POST['query']
+            queryResult = Receita.objects.filter(nome__contains=query)
 
+    tparams = {
+        'query': query,
+        'queryResult': queryResult,
+        'tags': tags
+    }
+    return render(request, 'resultadosPesquisa.html', tparams)
 
 
 

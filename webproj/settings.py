@@ -109,6 +109,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+APPEND_SLASH=False
+
 USE_I18N = True
 
 USE_L10N = True

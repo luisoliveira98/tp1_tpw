@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">Resultados da pesquisa '{{ query }}'</h2>
+        <hr class="star-dark mb-5">
+        <!--Accordion-->
+        <div class="panel-group" id="accordion" >
+            <div class="panel panel-default" style="border:3px solid #18bc9c; border-radius: 10px; padding: 10px 10px 10px 10px;">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fas fa-search"></i>Filtros</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="form-group row">
+                            {% for tag in tags %}
+                                <div class="col-3">
+                                    <div class="checkbox">
+                                        <label> <input type="checkbox" name="tags" value="{{ tag.nome }}">{{ tag.nome }}
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!--Query result-->
+        {% if queryResult %}
+            {% for receita in queryResult %}
+                <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px" onclick="location.href='{% url 'receita' receita.id  %}'">
+                    <div class="media">
+                        <img src="/media/{{ receita.imagem }}" class="align-self-center mr-3" alt="..." style="width: 15%">
+                        <div class="media-body">
+                            <h5 class="mt-0">{{ receita.nome }}</h5>
+                            {{ receita.descricao }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="margin-top: 20px">Não encontrada nenhuma receita que satisfaça os seus  desejos :( </p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -34,6 +34,7 @@
             $('#id_' + prefix + '-TOTAL_FORMS').val(total);
             $(selector).after(newElement);
             var conditionRow = $('.form-row:not(:last)');
+            console.log(conditionRow)
             conditionRow.find('.btn.add-form-row')
                 .removeClass('btn-success').addClass('btn-danger')
                 .removeClass('add-form-row').addClass('remove-form-row')
@@ -42,7 +43,11 @@
         }
 
         function deleteForm(prefix, btn, total) {
+            console.log('aqui!!')
+            total++;
+            total++;
             if (total > 1) {
+                console.log('aqui!!!')
                 btn.closest('.form-row').remove();
                 var forms = $('.form-row');
                 console.log(prefix)
@@ -66,11 +71,12 @@
 
         $(document).on('click', '.remove-form-row', function (e) {
             e.preventDefault();
-            deleteForm('form', $(this));
+            total = $(this).attr('id');
+            deleteForm('form', $(this), total);
             return false;
         });
 
-        (function () {
+        /*(function () {
             'use strict';
             window.addEventListener('load', function () {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -86,7 +92,7 @@
                     }, false);
                 });
             }, false);
-        })();
+        })();*/
 
 
     </script>
@@ -175,12 +181,12 @@
                     <!-- Ingredientes-->
                     <div class="tab">
                         <div class="row form-row form-group spacer">
-                            <div class="form-group col-5">
+                            <div class="form-group col-4">
                                 <label for="">Nome do ingrediente:</label>
                                 <input class="form-control" type="text" name="ing-0" id="ing-0" required>
                             </div>
-                            <div class="form-group col-3">
-                                <label for="">Dose:</label>
+                            <div class="form-group col-4">
+                                <label for="">Quantidade:</label>
                                 <input class="form-control" type="number" name="qt-0" step="0.5" id="qt-0" required>
                             </div>
                             <div class="form-group col-3">
@@ -203,6 +209,22 @@
                         </div>
                     </div>
 
+                    <!-- Tags-->
+                    <div class="tab">
+                        <h4>Adicione tags</h4>
+                        <p></p>
+                        <div class="form-group row">
+                            {% for tag in tags %}
+                                <div class="col-4">
+                                    <div class="checkbox">
+                                        <label> <input type="checkbox" name="tags" value="{{ tag.nome }}">{{ tag.nome }}
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
                     <div style="overflow:auto;">
                         <div style="float:right;">
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
@@ -212,6 +234,7 @@
 
                     <!-- Circles which indicates the steps of the form: -->
                     <div style="text-align:center;margin-top:40px;">
+                        <span class="step"></span>
                         <span class="step"></span>
                         <span class="step"></span>
                         <span class="step"></span>

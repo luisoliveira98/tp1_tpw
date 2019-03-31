@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <!-- Portfolio Grid Section -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <h2 class="text-center text-uppercase text-secondary mb-0">{{ tipo }}</h2>
+                <hr class="star-dark mb-5">
+
+                <div class="row">
+                    {% if listaReceitas %}
+                        {% for receita in listaReceitas %}
+                            <div class="col-md-6 col-lg-4">
+                                <a class="portfolio-item d-block mx-auto" onclick="location.href='{% url 'receita' receita.id  %}'">
+                                    <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+
+                                        <div class="portfolio-item-caption-content my-auto w-100 text-center text-white" >
+                                            <h5>{{ receita.nome }}</h5>
+                                        </div>
+
+                                    </div>
+                                    <img class="img-fluid" src="/media/{{ receita.imagem }}" alt="">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Not found any result. </p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
