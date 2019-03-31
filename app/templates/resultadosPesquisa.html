@@ -14,16 +14,29 @@
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
+                    <form id="pesquisa" action="/pesquisa" method="POST" >
+                    {% csrf_token %}
                     <div class="form-group row">
                             {% for tag in tags %}
+                                {% if tag.nome in lst_tags %}
+                                <div class="col-3">
+                                    <div class="checkbox">
+                                        <label> <input type="checkbox" name="tags" value="{{ tag.nome }}" checked>{{ tag.nome }}
+                                        </label>
+                                    </div>
+                                </div>
+                                {% else %}
                                 <div class="col-3">
                                     <div class="checkbox">
                                         <label> <input type="checkbox" name="tags" value="{{ tag.nome }}">{{ tag.nome }}
                                         </label>
                                     </div>
                                 </div>
+                                {% endif %}
                             {% endfor %}
-                        </div>
+                    </div>
+                    <input type="hidden" class="form-control hide" name="query" value="{{ query }}">
+                    <button name="tags" type="submit" class="btn btn-primary">Filtrar</button>
                 </div>
             </div>
         </div>

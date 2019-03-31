@@ -1,3 +1,5 @@
+from typing import List, Any
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.http import HttpRequest, HttpResponse
@@ -177,18 +179,38 @@ def receita_tipo(request, tipo : str):
 
 def pesquisa(request):
     query=''
+    lst_tags = []
     tags = Tags.objects.all()
     if request.method=='POST':
         if 'query' in request.POST:
             query = request.POST['query']
             queryResult = Receita.objects.filter(nome__contains=query)
+        if 'tags' in request.POST and len(request.POST.getlist('tags', []))>1:
+            lst_tags = request.POST.getlist('tags', [])
+            temp_receitas = []
+            for t in lst_tags:
+                if t=='':
+                    continue
+                tag = Tags.objects.get(nome=t)
+                tag_receitas = tag.receitas.all()
+                for r in queryResult:
+                    if r in tag_receitas:
+                        temp_receitas.append(r)
+
+            queryResult = temp_receitas
 
     tparams = {
         'query': query,
         'queryResult': queryResult,
-        'tags': tags
+        'tags': tags,
+        'lst_tags': lst_tags
     }
     return render(request, 'resultadosPesquisa.html', tparams)
+
+def apagar_receita(request, id):
+    receita = Receita.objects.get(id=id)
+    receita.delete()
+    return redirect('perfil')
 
 
 

@@ -16,6 +16,10 @@
                             <h5 class="mt-0">{{ minhareceita.nome }}</h5>
                             {{ minhareceita.descricao }}
                         </div>
+                        <form id="save" action="/apagarReceita/{{ minhareceita.id }}" method="POST" >
+                            {% csrf_token %}
+                            <button class="btn btn-danger" id="{{ minhareceita.id }}"><i class="fas fa-trash"></i></button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}
