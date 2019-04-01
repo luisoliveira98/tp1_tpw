@@ -36,7 +36,7 @@
             var conditionRow = $('.form-row:not(:last)');
             console.log(conditionRow)
             conditionRow.find('.btn.add-form-row')
-                .removeClass('btn-success').addClass('btn-danger')
+                .removeClass('btn-primary ').addClass('btn-danger')
                 .removeClass('add-form-row').addClass('remove-form-row')
                 .html('-');
             return false;
@@ -104,72 +104,36 @@
         <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Adicionar Receita</h3>
         <hr class="star-dark mb-5" style="margin-top: 1.5rem">
 
-        <form class="needs-validation" id="receita" action="." method="post" enctype="multipart/form-data">
+        <form class="needs-validation regForm" id="receita" action="." method="post" enctype="multipart/form-data">
             {% csrf_token %}
+
+            <!-- Nome -->
             <div class="form-group">
-                <label for="nomeReceita">Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nomeReceita" placeholder="nome da receita" required>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <label for="descricaoReceita">Descrição:</label>
-                    <textarea class="form-control" name="descricao" id="descricaoReceita" rows="4" required></textarea>
-                </div>
-                <div class="form-group col">
-                    <label for="passoReceita">Passos de preparação:</label>
-                    <textarea class="form-control" name="passos" id="passoReceita" rows="4" required></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-6">
-                    <label>Tipo:</label>
-                    {% for tipo in tipos %}
-                        <div class="radio">
-                            <label><input type="radio" name="tipoReceita" value="carne" required>{{ tipo }}</label>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="form-group col-6">
-                    <label>Dificuldade:</label>
-                    {% for nivel in dificuldade %}
-                        <div class="radio">
-                            <label><input type="radio" name="dificuldade" value="Fácil" required>{{ nivel }}</label>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <label for="tempo">Tempo estimado (min):</label>
-                    <input class="form-control" type="number" name="tempo" id="tempo" min="0" required>
-                </div>
-                <div class="form-group col">
-                    <label for="dose">Dose:</label>
-                    <input class="form-control" type="number" name="dose" id="dose" min="0" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <label for="image">Imagem:</label>
-                    <input type="file" class="form-control-file" name="imagem" id="imagem" required>
-                </div>
+                <h6 align="center" style="margin-bottom: 20px">Comecemos pelo mais fácil.. o NOME :)</h6>
+                <input placeholder="Nome" type="text" class="form-control" name="nome" id="nomeReceita" style="width: 100%; max-width: 100%" required>
             </div>
 
-            <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Adicionar Ingredientes</h3>
-            <hr class="star-dark mb-5" style="margin-top: 1.5rem">
+            <!-- Descrição -->
+            <div class="form-group" style="margin-top: 60px; ">
+                <h6 align="center" style="margin-bottom: 20px">E agora, que tal uma breve descrição?</h6>
+                <textarea placeholder="Descrição" class="form-control" name="descricao" id="descricaoReceita" rows="4" style="width: 100%; max-width: 100%" required></textarea>
+            </div>
 
-            <div class="row form-row form-group spacer">
-                <div class="form-group col-5">
-                    <label for="">Nome do ingrediente:</label>
-                    <input type="text" name="ing-0" id="ing-0" required>
+            <!-- Ingrediente -->
+            <div>
+                <h6 align="center" style="margin-bottom: 35px; margin-top: 60px">Ora vamos lá a saber, do que vamos precisar?</h6>
+                <div class="row form-row form-group spacer" style="width: 100%; max-width: 100%; ">
+                <div class="col-5 form-group ">
+                    <label for="">Ingrediente:</label>
+                    <input placeholder="Nome" class="form-control" type="text" name="ing-0" id="ing-0" required>
                 </div>
-                <div class="form-group col-3">
+                <div class="col-3 form-group ">
                     <label for="">Dose:</label>
-                    <input type="number" name="qt-0" step="0.5" id="qt-0" required>
+                    <input class="form-control" type="number" name="qt-0" step="0.5" id="qt-0" required>
                 </div>
-                <div class="form-group col-3">
+                <div class="col-3 form-group ">
                     <label for="">Unidade:</label>
-                    <select name="un-0" id="in-0" required>
+                    <select class="form-control" name="un-0" id="in-0" required>
                         <option value="sem unidade">unidade(s)</option>
                         <option value="mL">mL</option>
                         <option value="L">L</option>
@@ -181,24 +145,76 @@
                         <option value="colher de café">c. café</option>
                     </select>
                 </div>
-                <div class="input-group-append">
-                    <button class="btn btn-success add-form-row" id="0">+</button>
+                <div class="col-1" style="padding-left: 30px; margin-top: 30px">
+                    <button class="btn btn-primary add-form-row" id="0">+</button>
+                </div>
+            </div>
+            </div>
+
+            <!-- Preparação -->
+            <div class="form-group" style="margin-top: 60px; ">
+                <h6 align="center" style="margin-bottom: 20px">Diga-nos, <span style="color: #18bc9c">TIM TIM</span> por <span style="color: #18bc9c">TIM TIM</span>, o que fazer!!</h6>
+                <textarea placeholder="1. Exemplo" class="form-control" name="passos" id="passoReceita" rows="4" style="width: 100%; max-width: 100%; "  required></textarea>
+            </div>
+
+            <!-- Tipo e Dificuldade -->
+            <div class="row" style="width: 100%; max-width: 100%; margin-top: 50px">
+                <div class="form-group col-6">
+                    <h6 align="center" style="margin-bottom: 20px">De que tipo é a receita?</h6>
+                    {% for tipo in tipos %}
+                        <div class="radio">
+                            <label><input type="radio" name="tipoReceita" value="carne" required>&nbsp;&nbsp;{{ tipo }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-6">
+                    <h6 align="center" style="margin-bottom: 20px">.. e qual o grau de dificuldade?!</h6>
+                    {% for nivel in dificuldade %}
+                        <div class="radio">
+                            <label><input type="radio" name="dificuldade" value="Fácil" required>&nbsp;&nbsp;{{ nivel }}</label>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
-            <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Tags</h3>
-            <hr class="star-dark mb-5" style="margin-top: 1.5rem">
-
-            <div class="form-group row">
-                {% for tag in tags %}
-                <div class="col-4">
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="tags" value="{{ tag.nome }}" required>{{ tag.nome }}</label>
-                    </div>
+            <!-- Tempo e Dose -->
+            <div class="row" style="margin-top:  50px">
+                <div class="form-group col-6">
+                    <h6 align="center" style="margin-bottom: 20px"><span style="color: #18bc9c">"Tempo é dinheiro"</span>.. vamos aos minutos? </h6>
+                    <input placeholder="Tempo(min)" style="width: 100%; max-width: 100%;" class="form-control" type="number" name="tempo" id="tempo" min="0" required>
                 </div>
-                {% endfor %}
+                <div class="form-group col-6">
+                    <h6 align="center" style="margin-bottom: 20px">Quantas doses vou eu ter?</h6>
+                    <input placeholder="Nº Doses" style="width: 100%; max-width: 100%;" class="form-control" type="number" name="dose" id="dose" min="0" required>
+                </div>
+            </div>
+
+            <!-- Imagem-->
+            <div class="row" style="margin-top:  50px">
+                <div class="form-group col">
+                    <h6 align="center" style="margin-bottom: 20px">E como os olhos também comem.. ;) </h6>
+                    <input type="file" class="form-control-file" name="imagem" id="imagem" required>
+                </div>
+            </div >
+
+            <!-- Tags-->
+            <div>
+                <h5 align="center" style="margin-top: 50px; padding-bottom: 0px">POR ÚLTIMO!</h5>
+                <h6 class="text-center text-secondary mb-0" style="margin-top: 10px;">O que é, o que é.. que?</h6>
+                <div class="form-group row" style="margin-top: 50px">
+                    {% for tag in tags %}
+                    <div class="col-3">
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="tags" value="{{ tag.nome }}" required>&nbsp;&nbsp;{{ tag.nome }}</label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
+
+
         </form>
+    </div>
 {% endblock %}

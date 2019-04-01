@@ -143,7 +143,7 @@ def criar_receita(request):
     tparams = {
         'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
         'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'],
-        'tags': tags
+        'tags': tags[::-1]
     }
 
     return render(request, 'adicionarReceita.html', tparams)
