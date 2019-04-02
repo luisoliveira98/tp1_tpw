@@ -9,17 +9,27 @@
         </p>
         {% if infominhasreceitas %}
             {% for minhareceita in infominhasreceitas %}
-                <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px" onclick="location.href='{% url 'receita' minhareceita.id  %}'">
-                    <div class="media">
-                        <img src="/media/{{ minhareceita.imagem }}" class="align-self-center mr-3" alt="..." style="width: 15%">
-                        <div class="media-body">
-                            <h5 class="mt-0">{{ minhareceita.nome }}</h5>
-                            {{ minhareceita.descricao }}
+                <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px" >
+                    <div class="media" >
+                        <div onclick="location.href='{% url 'receita' minhareceita.id  %}'">
+                            <img src="/media/{{ minhareceita.imagem }}" class="align-self-center mr-3" alt="..."
+                                 style="width: 15%">
+                            <div class="media-body">
+                                <h5 class="mt-0">{{ minhareceita.nome }}</h5>
+                                {{ minhareceita.descricao }}
+                            </div>
                         </div>
-                        <form id="save" action="/apagarReceita/{{ minhareceita.id }}" method="POST" >
-                            {% csrf_token %}
-                            <button class="btn btn-danger" id="{{ minhareceita.id }}"><i class="fas fa-trash"></i></button>
-                        </form>
+
+                        <div>
+                            <button class="btn btn-primary" onclick="location.href='{% url 'updateReceita' minhareceita.id  %}'"><i class="fas fa-edit"></i></button>
+                        </div>
+                        <div>
+                            <form id="save" action="/apagarReceita/{{ minhareceita.id }}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-danger" id="{{ minhareceita.id }}"><i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             {% endfor %}

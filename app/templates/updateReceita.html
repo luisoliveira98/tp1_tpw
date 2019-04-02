@@ -76,7 +76,7 @@
             return false;
         });
 
-        (function () {
+        /*(function () {
             'use strict';
             window.addEventListener('load', function () {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -92,7 +92,7 @@
                     }, false);
                 });
             }, false);
-        })();
+        })();*/
 
 
     </script>
@@ -101,61 +101,67 @@
 {% block content %}
 
     <div class="container body-content">
-        <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Adicionar Receita</h3>
+        <h3 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Alterar Receita</h3>
         <hr class="star-dark mb-5" style="margin-top: 1.5rem">
 
-        <form class="needs-validation regForm" id="receita" action="." method="post" enctype="multipart/form-data">
+        <form class="needs-validation regForm" id="receita" action="/updateReceita/{{ receita.id }}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- Nome -->
             <div class="form-group">
                 <h6 align="center" style="margin-bottom: 20px">Comecemos pelo mais fácil.. o NOME :)</h6>
-                <input placeholder="Nome" type="text" class="form-control" name="nome" id="nomeReceita" style="width: 100%; max-width: 100%" required>
+                <input placeholder="Nome" type="text" class="form-control" name="nome" id="nomeReceita" style="width: 100%; max-width: 100%" value="{{ receita.nome }}" required>
             </div>
 
             <!-- Descrição -->
             <div class="form-group" style="margin-top: 60px; ">
                 <h6 align="center" style="margin-bottom: 20px">E agora, que tal uma breve descrição?</h6>
-                <textarea placeholder="Descrição" class="form-control" name="descricao" id="descricaoReceita" rows="4" style="width: 100%; max-width: 100%" required></textarea>
+                <textarea placeholder="Descrição" class="form-control" name="descricao" id="descricaoReceita" rows="4" style="width: 100%; max-width: 100%"  required>{{ receita.descricao }}</textarea>
             </div>
 
             <!-- Ingrediente -->
             <div>
                 <h6 align="center" style="margin-bottom: 35px; margin-top: 60px">Ora vamos lá a saber, do que vamos precisar?</h6>
-                <div class="row form-row form-group spacer" style="width: 100%; max-width: 100%; ">
-                <div class="col-5 form-group ">
-                    <label for="">Ingrediente:</label>
-                    <input placeholder="Nome" class="form-control" type="text" name="ing-0" id="ing-0" required>
-                </div>
-                <div class="col-3 form-group ">
-                    <label for="">Quantidade:</label>
-                    <input class="form-control" type="number" name="qt-0" step="0.5" id="qt-0" required>
-                </div>
-                <div class="col-3 form-group ">
-                    <label for="">Unidade:</label>
-                    <select class="form-control" name="un-0" id="in-0" required>
-                        <option value="sem unidade">unidade(s)</option>
-                        <option value="mL">mL</option>
-                        <option value="L">L</option>
-                        <option value="g">g</option>
-                        <option value="g">kg</option>
-                        <option value="chávena">chávena</option>
-                        <option value="colher de sopa">c. sopa</option>
-                        <option value="colher de chá">c. chá</option>
-                        <option value="colher de café">c. café</option>
-                        <option value="qb" selected>qb</option>
-                    </select>
-                </div>
-                <div class="col-1" style="padding-left: 30px; margin-top: 30px">
-                    <button class="btn btn-primary add-form-row" id="0">+</button>
-                </div>
-            </div>
+                {% load index %}
+                {% for num in range_ingredientes %}
+                    <div class="row form-row form-group spacer" style="width: 100%; max-width: 100%; ">
+                        <div class="col-5 form-group ">
+                            <label for="">Ingrediente:</label>
+                            <input placeholder="Nome" class="form-control" type="text" name="ing-{{ num }}" id="ing-{{ num }}" value="{{ ingredientes_receita | nome:num }}" required>
+                        </div>
+                        <div class="col-3 form-group ">
+                            <label for="">Quantidade:</label>
+                            <input class="form-control" type="number" name="qt-{{ num }}" step="0.5" id="qt-{{ num }}" value="{{ ingredientes_receita | quantidade:num }}" required>
+                        </div>
+                        <div class="col-3 form-group ">
+                            <label for="">Unidade:</label>
+                            <select class="form-control" name="un-{{ num }}" id="in-{{ num }}" required>
+                                {% for u in unidades %}
+                                    {% if u == ingredientes_receita|unidade:num %}
+                                        <option value="{{ u }}" selected>{{ u }}</option>
+                                    {% else %}
+                                        <option value="{{ u }}" >{{ u }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% if num == n_ingredientes %}
+                            <div class="col-1" style="padding-left: 30px; margin-top: 30px">
+                                <button class="btn btn-primary add-form-row" id="{{ num }}">+</button>
+                            </div>
+                        {% else %}
+                            <div class="col-1" style="padding-left: 30px; margin-top: 30px">
+                                <button class="btn btn-danger remove-form-row" id="{{ num }}">-</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
 
             <!-- Preparação -->
             <div class="form-group" style="margin-top: 60px; ">
                 <h6 align="center" style="margin-bottom: 20px">Diga-nos, <span style="color: #18bc9c">TIM TIM</span> por <span style="color: #18bc9c">TIM TIM</span>, o que fazer!!</h6>
-                <textarea placeholder="1. Exemplo" class="form-control" name="passos" id="passoReceita" rows="10" style="width: 100%; max-width: 100%; "  required></textarea>
+                <textarea placeholder="1. Exemplo" class="form-control" name="passos" id="passoReceita" rows="10" style="width: 100%; max-width: 100%; "  required>{{ receita.preparacao }}</textarea>
             </div>
 
             <!-- Tipo e Dificuldade -->
@@ -163,17 +169,33 @@
                 <div class="form-group col-6">
                     <h6 align="center" style="margin-bottom: 20px">De que tipo é a receita?</h6>
                     {% for tipo in tipos %}
-                        <div class="radio">
-                            <label><input type="radio" name="tipoReceita" value="{{ tipo }}" required>&nbsp;&nbsp;{{ tipo }}</label>
-                        </div>
+                        {% if receita.tipo == tipo %}
+                            <div class="radio">
+                                <label><input type="radio" name="tipoReceita" value="{{ tipo }}" checked
+                                              required>&nbsp;&nbsp;{{ tipo }}</label>
+                            </div>
+                        {% else %}
+                            <div class="radio">
+                                <label><input type="radio" name="tipoReceita" value="{{ tipo }}"
+                                              required>&nbsp;&nbsp;{{ tipo }}</label>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="form-group col-6">
                     <h6 align="center" style="margin-bottom: 20px">.. e qual o grau de dificuldade?!</h6>
                     {% for nivel in dificuldade %}
-                        <div class="radio">
-                            <label><input type="radio" name="dificuldade" value="{{ nivel }}" required>&nbsp;&nbsp;{{ nivel }}</label>
-                        </div>
+                        {% if receita.dificuldade == nivel %}
+                            <div class="radio">
+                                <label><input type="radio" name="dificuldade" value="{{ nivel }}" checked
+                                              required>&nbsp;&nbsp;{{ nivel }}</label>
+                            </div>
+                        {% else %}
+                            <div class="radio">
+                                <label><input type="radio" name="dificuldade" value="{{ nivel }}"
+                                              required>&nbsp;&nbsp;{{ nivel }}</label>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
@@ -182,11 +204,11 @@
             <div class="row" style="margin-top:  50px">
                 <div class="form-group col-6">
                     <h6 align="center" style="margin-bottom: 20px"><span style="color: #18bc9c">"Tempo é dinheiro"</span>.. vamos aos minutos? </h6>
-                    <input placeholder="Tempo(min)" style="width: 100%; max-width: 100%;" class="form-control" type="number" name="tempo" id="tempo" min="0" required>
+                    <input placeholder="Tempo(min)" style="width: 100%; max-width: 100%;" class="form-control" type="number" name="tempo" id="tempo" min="0" value="{{ receita.tempo }}" required>
                 </div>
                 <div class="form-group col-6">
                     <h6 align="center" style="margin-bottom: 20px">Quantas doses vou eu ter?</h6>
-                    <input placeholder="Nº Doses" style="width: 100%; max-width: 100%;" class="form-control" type="number" name="dose" id="dose" min="0" required>
+                    <input placeholder="Nº Doses" style="width: 100%; max-width: 100%;" class="form-control" type="number" name="dose" id="dose" min="0" value="{{ receita.dose }}" required>
                 </div>
             </div>
 
@@ -194,7 +216,7 @@
             <div class="row" style="margin-top:  50px">
                 <div class="form-group col">
                     <h6 align="center" style="margin-bottom: 20px">E como os olhos também comem.. ;) </h6>
-                    <input type="file" class="form-control-file" name="imagem" id="imagem" required>
+                    <input type="file" class="form-control-file" name="imagem" id="imagem" >
                 </div>
             </div >
 
@@ -204,11 +226,19 @@
                 <h6 class="text-center text-secondary mb-0" style="margin-top: 10px;">O que é, o que é.. que?</h6>
                 <div class="form-group row" style="margin-top: 50px">
                     {% for tag in tags %}
-                    <div class="col-3">
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="tags" value="{{ tag.nome }}" required>&nbsp;&nbsp;{{ tag.nome }}</label>
-                        </div>
-                    </div>
+                        {% if tag in tags_receita %}
+                            <div class="col-3">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="tags" value="{{ tag.nome }}" checked>&nbsp;&nbsp;{{ tag.nome }} </label>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-3">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="tags" value="{{ tag.nome }}" >&nbsp;&nbsp;{{ tag.nome }}</label>
+                                </div>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

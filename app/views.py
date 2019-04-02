@@ -25,11 +25,15 @@ def home(request):
 
 
 def receita(request, id):
+    print(id)
     assert isinstance(request, HttpRequest)
 
     receita = Receita.objects.get(id=id)
     listIngredientes = Ingredientes.objects.filter(receita=receita)
     preparacaoPassos = re.split(re.compile('[0-9]\. '), receita.preparacao)
+    comentarios = Comentario.objects.filter(receita=receita)
+
+    print(comentarios)
 
     saved = ReceitasGuardadas.objects.filter(receita=receita, utilizador=request.user)
     liked = ReceitasGostadas.objects.filter(receita=receita, utilizador=request.user)
@@ -78,7 +82,8 @@ def receita(request, id):
         'listIngredientes': listIngredientes,
         'preparacao': preparacaoPassos[1:],
         'booksaveclass': booksave,
-        'likeclass': likeclass
+        'likeclass': likeclass,
+        'comentarios': comentarios
     }
 
     return render(request, 'receita.html', tparams)
@@ -143,6 +148,7 @@ def criar_receita(request):
     tparams = {
         'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
         'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'],
+        'unidades': ['unidade', 'mL', 'L', 'g', 'kg', 'chávena', 'c. sopa', 'c. chá', 'c. café', 'qb'],
         'tags': tags[::-1]
     }
 
@@ -211,6 +217,75 @@ def apagar_receita(request, id):
     receita = Receita.objects.get(id=id)
     receita.delete()
     return redirect('perfil')
+
+
+def comentar_receita(request, id):
+    if request.method == 'POST':
+        comentario = request.POST['comentario']
+        receita = Receita.objects.get(id=id)
+        c = Comentario(receita=receita, data=datetime.now().strftime('%Y-%m-%d'), utilizador=request.user, comentario=comentario)
+        c.save()
+        return redirect('receita', id)
+
+
+def update_receita(request, id):
+    receita = Receita.objects.get(id=id)
+    tags = Tags.objects.all()
+    tags_receita = Tags.objects.filter(receitas=receita)
+    ingredientes_receita = Ingredientes.objects.filter(receita=receita)
+    print(request.POST)
+
+    if request.method == 'POST':
+        print('aqui')
+        receita.nome = request.POST['nome']
+        receita.descricao = request.POST['descricao']
+        receita.preparacao = request.POST['passos']
+        receita.tipo = request.POST['tipoReceita']
+        receita.tempo = request.POST['tempo']
+        receita.dificuldade = request.POST['dificuldade']
+        receita.dose = request.POST['dose']
+        receita.save()
+
+        for ingrediente in ingredientes_receita:
+            ingrediente.delete()
+        for tag in tags_receita:
+            tag.receitas.remove(receita)
+
+        lst_ingredientes = []
+        lst_quantidades = []
+        lst_unidades = []
+        for key in request.POST:
+            if key.startswith('ing-'):
+                lst_ingredientes.append(request.POST[key])
+            elif key.startswith('qt-'):
+                lst_quantidades.append(request.POST[key])
+            elif key.startswith('un-'):
+                lst_unidades.append(request.POST[key])
+
+        for i in range(len(lst_quantidades)):
+            ing = Ingredientes(receita=receita, ingredienteName=lst_ingredientes[i],
+                               ingredienteQuant=lst_quantidades[i], unidade=lst_unidades[i])
+            ing.save()
+
+        for tag in request.POST.getlist('tags', []):
+            t = Tags.objects.get(nome=tag)
+            t.receitas.add(receita)
+
+        return redirect('perfil')
+
+    tparams = {
+        'receita': receita,
+        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
+        'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'],
+        'unidades': ['unidade', 'mL', 'L', 'g', 'kg', 'chávena', 'c. sopa', 'c. chá', 'c. café', 'qb'],
+        'tags': tags[::-1],
+        'tags_receita': tags_receita,
+        'ingredientes_receita': ingredientes_receita,
+        'range_ingredientes': range(len(ingredientes_receita)),
+        'n_ingredientes': len(ingredientes_receita)-1
+    }
+    return render(request, 'updateReceita.html', tparams)
+
 
 
 
