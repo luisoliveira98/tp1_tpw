@@ -143,7 +143,7 @@ def criar_receita(request):
         return redirect('home')
 
     tparams = {
-        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa', 'Massas', 'Entrada'],
+        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamento', 'Vegetariano', 'Sobremesa', 'Massas', 'Entrada'],
         'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'],
         'unidades': ['unidade', 'mL', 'L', 'g', 'kg', 'chávena', 'c. sopa', 'c. chá', 'c. café', 'qb'],
         'tags': tags[::-1]
