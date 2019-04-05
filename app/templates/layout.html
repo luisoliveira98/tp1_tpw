@@ -54,14 +54,14 @@
                         Receitas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'tipoReceita' 'sopa' %}">Sopas</a>
-                        <a class="dropdown-item" href="{% url 'tipoReceita' 'carne' %}">Carnes</a>
-                        <a class="dropdown-item" href="{% url 'tipoReceita' 'peixe' %}">Peixes</a>
-                        <a class="dropdown-item" href="{% url 'tipoReceita' 'sobremesa' %}">Sobremesas</a>
-                        <a class="dropdown-item" href="{% url 'tipoReceita' 'vegetariano' %}">Vegetariano</a>
-                        <a class="dropdown-item" href="{% url 'tipoReceita' 'acompanhamento' %}">Acompanhamentos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Acompanhamento' %}">Acompanhamentos</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Carne' %}">Carnes</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Entrada' %}">Entradas</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Massas' %}">Massas</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Peixe' %}">Peixes</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Sobremesa' %}">Sobremesas</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Sopa' %}">Sopas</a>
+                        <a class="dropdown-item" href="{% url 'tipoReceita' 'Vegetariano' %}">Vegetariano</a>
                     </div>
                 </li>
             </ul>
@@ -89,11 +89,6 @@
         {% block content %} {% endblock %}
     </div> <!-- /container -->
 </main>
-
-<footer>
-    <hr/>
-    <p>&copy; {{ year }} - My Django Application</p>
-</footer>
 
 <!-- JQuery and Bootstrap core
 ================================================== -->

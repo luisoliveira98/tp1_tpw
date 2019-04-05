@@ -149,15 +149,21 @@
             </div>
         </div>
 
+    {% if request.user.is_authenticated %}
         <h5 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Comentários</h5>
         {% if comentarios %}
             {% for comentario in comentarios %}
                 <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px">
                     <div class="media">
-                        <img src="../../static/imgs/account.png" class="align-self-center mr-3" alt="..." style="width: 15%" />
+                        <img src="../../static/imgs/account.png" class="align-self-center mr-3" alt="..." style="width: 5%" />
                         <div class="media-body">
                             <h5 class="mt-0">{{ comentario.utilizador }}</h5>
-                            {{ comentario.comentario }}
+                            <div style="font-size: 80%">
+                                {{ comentario.data }}
+                            </div>
+                            <div style="font-size: 120%">
+                                {{ comentario.comentario }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,11 +173,12 @@
         {% endif %}
 
         <button type="button align" class="btn btn-info btn-lg" data-toggle="modal" data-target="#comentarioModal" >comentar</button>
+    {% endif %}
     </div>
 
     <!-- Modal -->
     <div id="comentarioModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
             <div class="modal-content">
@@ -184,7 +191,7 @@
                     {% csrf_token %}
                         <div class="form-group col">
                             <label for="descricaoReceita">Comentário:</label>
-                            <textarea style="min-width: 100%; height:100px;" class="form-control" name="comentario" id="descricaoReceita" rows="4" required></textarea>
+                            <textarea style="min-width: 100%; height:100px;" class="form-control" name="comentario" id="descricaoReceita" rows="12" required></textarea>
                         </div>
                     </form>
                 </div>

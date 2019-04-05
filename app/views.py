@@ -32,9 +32,6 @@ def receita(request, id):
     listIngredientes = Ingredientes.objects.filter(receita=receita)
     preparacaoPassos = re.split(re.compile('[0-9]\. '), receita.preparacao)
     comentarios = Comentario.objects.filter(receita=receita)
-
-    print(comentarios)
-
     saved = ReceitasGuardadas.objects.filter(receita=receita, utilizador=request.user)
     liked = ReceitasGostadas.objects.filter(receita=receita, utilizador=request.user)
 
@@ -146,7 +143,7 @@ def criar_receita(request):
         return redirect('home')
 
     tparams = {
-        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa'],
+        'tipos': ['Sopa', 'Carne', 'Peixe', 'Acompanhamentos', 'Vegetariano', 'Sobremesa', 'Massas', 'Entrada'],
         'dificuldade': ['Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'],
         'unidades': ['unidade', 'mL', 'L', 'g', 'kg', 'chávena', 'c. sopa', 'c. chá', 'c. café', 'qb'],
         'tags': tags[::-1]

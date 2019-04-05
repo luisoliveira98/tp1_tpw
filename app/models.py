@@ -39,7 +39,7 @@ class Tags(models.Model):
 class Comentario(models.Model):
     receita = models.ForeignKey(Receita, on_delete=models.CASCADE)
     comentario = models.CharField(max_length=200)
-    data = models.DateTimeField()
+    data = models.DateField()
     utilizador = models.CharField(max_length=100)
 
     def __str__(self):
