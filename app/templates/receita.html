@@ -150,10 +150,18 @@
         </div>
 
     {% if request.user.is_authenticated %}
-        <h5 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">Comentários</h5>
+        <h5 class="text-center text-uppercase text-secondary mb-0" style="margin-top: 4rem">
+            Comentários
+        </h5>
+        <p align="left" style="margin-top: 10px">
+            <a data-toggle="modal" data-target="#comentarioModal">
+                <i class="fas fa-plus" style="font-size: 13px; color: #18bc9c;"></i>&nbsp;&nbsp;Adicionar Comentário
+            </a>
+
+        </p>
         {% if comentarios %}
             {% for comentario in comentarios %}
-                <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px">
+                <div class="row border" style="padding: 15px 10px 10px 10px; margin-top: 18px; border-radius: 10px">
                     <div class="media">
                         <img src="../../static/imgs/account.png" class="align-self-center mr-3" alt="..." style="width: 5%" />
                         <div class="media-body">
@@ -171,8 +179,9 @@
         {% else %}
             <p style="margin-top: 20px">Não existem comentários nesta receita</p>
         {% endif %}
-
-        <button type="button align" class="btn btn-info btn-lg" data-toggle="modal" data-target="#comentarioModal" >comentar</button>
+        <div align="center">
+            <button style="margin-top: 15px" type="button align" class="btn btn-outline-success1"  data-toggle="modal" data-target="#comentarioModal" >Adicionar comentário</button>
+        </div>
     {% endif %}
     </div>
 
@@ -195,8 +204,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="submitComentario()">Comentar</button>
+                <div class="modal-footer" >
+                    <button class="btn btn-outline-success1 my-2 my-sm-0" type="submit" onclick="submitComentario()">Comentar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
