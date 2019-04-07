@@ -27,8 +27,8 @@ def home(request):
 def receita(request, id):
     print(id)
     assert isinstance(request, HttpRequest)
-
     receita = Receita.objects.get(id=id)
+    tags = [tag for tag in Tags.objects.all() if receita in tag.receitas.all()]
     listIngredientes = Ingredientes.objects.filter(receita=receita)
     preparacaoPassos = re.split(re.compile('[0-9]\. '), receita.preparacao)
     comentarios = Comentario.objects.filter(receita=receita)
@@ -80,7 +80,8 @@ def receita(request, id):
         'preparacao': preparacaoPassos[1:],
         'booksaveclass': booksave,
         'likeclass': likeclass,
-        'comentarios': comentarios
+        'comentarios': comentarios,
+        'tags': tags
     }
 
     return render(request, 'receita.html', tparams)
@@ -284,5 +285,14 @@ def update_receita(request, id):
     return render(request, 'updateReceita.html', tparams)
 
 
+def receita_tag(request, tag):
+    print(tag)
+    tag = Tags.objects.get(nome=tag)
+    receitas = tag.receitas.all()
+    tparams = {
+        'tag': tag,
+        'receitas':receitas
+    }
+    return render(request, 'receitasTags.html', tparams)
 
 

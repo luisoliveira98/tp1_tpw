@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h2 style="padding-top: 96px" class="text-center text-uppercase text-secondary mb-0">Receitas com a tag: '{{ tag }}'</h2>
+        <hr class="star-dark mb-5">
+        <!--Query result-->
+        {% for receita in receitas %}
+            <div class="row" style="padding: 15px 10px 10px 10px; margin-top: 18px"
+                 onclick="location.href='{% url 'receita' receita.id %}'">
+                <div class="media">
+                    <img src="/media/{{ receita.imagem }}" class="align-self-center mr-3" alt="..."
+                         style="width: 15%">
+                    <div class="media-body">
+                        <h5 class="mt-0">{{ receita.nome }}</h5>
+                        {{ receita.descricao }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
